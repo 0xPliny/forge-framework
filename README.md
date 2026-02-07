@@ -230,6 +230,18 @@ Combined: 99.9%+ correctness for well-defined problems
 
 ---
 
+## Tools
+
+### FORGE Docs — AI Documentation Engine
+
+[![FORGE Docs](https://img.shields.io/badge/FORGE_Docs-Live_Demo-00e5ff?style=for-the-badge)](https://0xpliny.github.io/ai-documentation-toolkit/)
+
+Generate comprehensive, structured documentation for any codebase using GPT-4 and the HARVEST workflow. Three-panel dark industrial UI with animated pipeline visualization.
+
+**[Try it →](https://0xpliny.github.io/ai-documentation-toolkit/)** | **[Source Code](https://github.com/0xPliny/ai-documentation-toolkit)**
+
+---
+
 ## IDE Integration
 
 FORGE includes `.cursorrules` templates for governing AI behavior directly in your IDE:
