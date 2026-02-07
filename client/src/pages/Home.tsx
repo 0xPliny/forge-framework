@@ -9,7 +9,7 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-[#0a0e1a]/80 backdrop-blur-md">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/assets/forge-logo-lava.webp" alt="FORGE" className="w-8 h-8" />
+            <img src="/assets/forge-logo-hammer-lava.webp" alt="FORGE" className="w-8 h-8" />
             <span className="font-display font-bold text-xl tracking-widest text-white">FORGE</span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-mono text-slate-400">
@@ -206,7 +206,7 @@ export default function Home() {
       <footer className="py-12 border-t border-white/5 bg-[#05070d]">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
-            <img src="/assets/forge-logo-lava.webp" alt="FORGE" className="w-6 h-6 grayscale opacity-50" />
+            <img src="/assets/forge-logo-hammer-lava.webp" alt="FORGE" className="w-6 h-6 grayscale opacity-50" />
             <span className="font-display font-bold text-slate-500">FORGE FRAMEWORK</span>
           </div>
           <div className="text-slate-600 text-sm font-mono">
