@@ -9,14 +9,14 @@ export default function Home() {
       <nav className="fixed top-0 w-full z-50 border-b border-white/5 bg-[#0a0e1a]/80 backdrop-blur-md">
         <div className="container mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <img src="/assets/rise-icon.webp" alt="FORGE" className="w-8 h-8" />
+            <img src="/assets/forge-logo-lava.webp" alt="FORGE" className="w-8 h-8" />
             <span className="font-display font-bold text-xl tracking-widest text-white">FORGE</span>
           </div>
           <div className="hidden md:flex items-center gap-8 text-sm font-mono text-slate-400">
-            <a href="#methodology" className="hover:text-cyan-400 transition-colors">METHODOLOGY</a>
-            <a href="#impact" className="hover:text-cyan-400 transition-colors">IMPACT</a>
-            <a href="#tools" className="hover:text-cyan-400 transition-colors">TOOLS</a>
-            <Button variant="outline" className="border-cyan-500/50 text-cyan-400 hover:bg-cyan-500/10 font-mono rounded-none">
+            <a href="#methodology" className="hover:text-orange-500 transition-colors">METHODOLOGY</a>
+            <a href="#impact" className="hover:text-orange-500 transition-colors">IMPACT</a>
+            <a href="#tools" className="hover:text-orange-500 transition-colors">TOOLS</a>
+            <Button variant="outline" className="border-orange-500/50 text-orange-500 hover:bg-orange-500/10 font-mono rounded-none">
               GITHUB
             </Button>
           </div>
@@ -36,13 +36,17 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="space-y-8"
           >
-            <div className="inline-flex items-center gap-2 px-3 py-1 border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-xs font-mono tracking-wider">
-              <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 border border-orange-500/30 bg-orange-500/5 text-orange-500 text-xs font-mono tracking-wider">
+              <span className="w-2 h-2 bg-orange-500 rounded-full animate-pulse" />
               ENTERPRISE GRADE
             </div>
             
             <h1 className="font-display text-5xl md:text-7xl font-bold leading-tight text-white">
-          ORCHESTRATED <br />\n              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 text-glow">\n                INTELLIGENCE\n              </span>           </h1>
+              ORCHESTRATED <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-red-600 text-glow">
+                INTELLIGENCE
+              </span>
+            </h1>
             
             <p className="text-slate-400 text-lg md:text-xl max-w-xl leading-relaxed">
               Framework for Orchestrated, Repeatable, Governed Engineering. 
@@ -50,10 +54,10 @@ export default function Home() {
             </p>
             
             <div className="flex flex-wrap gap-4">
-              <Button className="h-12 px-8 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-none tracking-wide">
+              <Button className="h-12 px-8 bg-orange-600 hover:bg-orange-500 text-white font-bold rounded-none tracking-wide">
                 GET STARTED
               </Button>
-              <Button variant="outline" className="h-12 px-8 border-slate-700 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-400 rounded-none font-mono">
+              <Button variant="outline" className="h-12 px-8 border-slate-700 text-slate-300 hover:border-orange-500/50 hover:text-orange-500 rounded-none font-mono">
                 VIEW DOCUMENTATION
               </Button>
             </div>
@@ -66,18 +70,18 @@ export default function Home() {
             className="relative hidden lg:block"
           >
             <div className="relative w-full aspect-square max-w-lg mx-auto animate-float">
-              <img src="/assets/hero-bg.webp" alt="The Forge" className="w-full h-full object-contain drop-shadow-[0_0_50px_rgba(0,212,255,0.2)]" />
+              <img src="/assets/hero-bg-lava.webp" alt="The Forge" className="w-full h-full object-contain drop-shadow-[0_0_50px_rgba(255,100,0,0.2)]" />
               
               {/* Floating UI Elements */}
-              <div className="absolute -top-10 -right-10 p-4 bg-[#0a0e1a]/90 border border-cyan-500/30 backdrop-blur-md">
+              <div className="absolute -top-10 -right-10 p-4 bg-[#0a0e1a]/90 border border-orange-500/30 backdrop-blur-md">
                 <div className="flex items-center gap-3 mb-2">
-                  <Terminal className="w-4 h-4 text-cyan-400" />
-                  <span className="text-xs font-mono text-cyan-400">SYSTEM_METRICS</span>
+                  <Terminal className="w-4 h-4 text-orange-500" />
+                  <span className="text-xs font-mono text-orange-500">SYSTEM_METRICS</span>
                 </div>
                 <div className="space-y-1 font-mono text-xs text-slate-400">
-                  <div className="flex justify-between gap-8"><span>CORE</span><span className="text-green-400">ONLINE</span></div>
-                  <div className="flex justify-between gap-8"><span>GOVERNANCE</span><span className="text-green-400">ACTIVE</span></div>
-                  <div className="flex justify-between gap-8"><span>MEMORY</span><span className="text-cyan-400">SYNCED</span></div>
+                  <div className="flex justify-between gap-8"><span>CORE</span><span className="text-orange-400">ONLINE</span></div>
+                  <div className="flex justify-between gap-8"><span>GOVERNANCE</span><span className="text-orange-400">ACTIVE</span></div>
+                  <div className="flex justify-between gap-8"><span>MEMORY</span><span className="text-orange-400">SYNCED</span></div>
                 </div>
               </div>
             </div>
@@ -119,16 +123,16 @@ export default function Home() {
               <motion.div 
                 key={i}
                 whileHover={{ y: -10 }}
-                className="cyber-border p-8 group"
+                className="cyber-border p-8 group border border-white/5 hover:border-orange-500/30 transition-colors bg-white/5"
               >
                 <div className="mb-6 relative">
-                  <div className="absolute inset-0 bg-cyan-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <div className="absolute inset-0 bg-orange-500/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
                   <img src={item.icon} alt={item.title} className="w-16 h-16 relative z-10" />
                 </div>
-                <h3 className="font-display text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                <h3 className="font-display text-2xl font-bold text-white mb-2 group-hover:text-orange-500 transition-colors">
                   {item.title}
                 </h3>
-                <p className="font-mono text-xs text-cyan-500 mb-4 tracking-wider uppercase">{item.subtitle}</p>
+                <p className="font-mono text-xs text-orange-500 mb-4 tracking-wider uppercase">{item.subtitle}</p>
                 <p className="text-slate-400 leading-relaxed">
                   {item.desc}
                 </p>
@@ -143,7 +147,7 @@ export default function Home() {
         <div className="container mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           <div>
             <h2 className="font-display text-4xl font-bold text-white mb-8">
-              MEASURABLE <span className="text-cyan-400">IMPACT</span>
+              MEASURABLE <span className="text-orange-500">IMPACT</span>
             </h2>
             
             <div className="space-y-8">
@@ -152,9 +156,9 @@ export default function Home() {
                 { label: "Development Velocity", value: "10x", desc: "Increase in output while reducing error rates" },
                 { label: "Knowledge Growth", value: "+396%", desc: "Expansion of structured documentation base" }
               ].map((stat, i) => (
-                <div key={i} className="border-l-2 border-cyan-500/30 pl-6 py-2">
+                <div key={i} className="border-l-2 border-orange-500/30 pl-6 py-2">
                   <div className="font-display text-5xl font-bold text-white mb-1">{stat.value}</div>
-                  <div className="font-mono text-cyan-400 text-sm mb-2">{stat.label}</div>
+                  <div className="font-mono text-orange-500 text-sm mb-2">{stat.label}</div>
                   <p className="text-slate-400 text-sm">{stat.desc}</p>
                 </div>
               ))}
@@ -162,8 +166,8 @@ export default function Home() {
           </div>
           
           <div className="relative">
-            <div className="absolute inset-0 bg-cyan-500/10 blur-3xl rounded-full" />
-            <img src="/assets/impact-chart.webp" alt="Impact Chart" className="relative z-10 w-full border border-cyan-500/20 bg-[#0a0e1a]/80 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-orange-500/10 blur-3xl rounded-full" />
+            <img src="/assets/impact-chart.webp" alt="Impact Chart" className="relative z-10 w-full border border-orange-500/20 bg-[#0a0e1a]/80 backdrop-blur-sm" />
           </div>
         </div>
       </section>
@@ -187,8 +191,8 @@ export default function Home() {
               { name: "OpenAI", icon: <Cpu /> },
               { name: "Anthropic", icon: <Shield /> }
             ].map((tool, i) => (
-              <div key={i} className="p-6 border border-white/5 bg-white/5 hover:bg-cyan-500/10 hover:border-cyan-500/30 transition-all flex flex-col items-center gap-3 group">
-                <div className="text-slate-400 group-hover:text-cyan-400 transition-colors">
+              <div key={i} className="p-6 border border-white/5 bg-white/5 hover:bg-orange-500/10 hover:border-orange-500/30 transition-all flex flex-col items-center gap-3 group">
+                <div className="text-slate-400 group-hover:text-orange-500 transition-colors">
                   {tool.icon}
                 </div>
                 <span className="font-mono text-sm text-slate-300">{tool.name}</span>
@@ -202,7 +206,7 @@ export default function Home() {
       <footer className="py-12 border-t border-white/5 bg-[#05070d]">
         <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-6">
           <div className="flex items-center gap-3">
-            <img src="/assets/rise-icon.webp" alt="FORGE" className="w-6 h-6 grayscale opacity-50" />
+            <img src="/assets/forge-logo-lava.webp" alt="FORGE" className="w-6 h-6 grayscale opacity-50" />
             <span className="font-display font-bold text-slate-500">FORGE FRAMEWORK</span>
           </div>
           <div className="text-slate-600 text-sm font-mono">
