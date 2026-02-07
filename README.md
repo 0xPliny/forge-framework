@@ -1,3 +1,15 @@
+<p align="center">
+  <a href="https://github.com/0xPliny/forge-framework">
+    <img src="assets/forge-banner-dark.png" alt="FORGE Framework Banner">
+  </a>
+</p>
+
+<p align="center">
+    <a href="https://github.com/0xPliny/forge-framework/stargazers"><img src="https://img.shields.io/github/stars/0xPliny/forge-framework?style=for-the-badge&logo=github&color=00d4ff&logoColor=white" alt="Stars"></a>
+    <a href="https://github.com/0xPliny/forge-framework/network/members"><img src="https://img.shields.io/github/forks/0xPliny/forge-framework?style=for-the-badge&logo=github&color=00d4ff&logoColor=white" alt="Forks"></a>
+    <a href="https://github.com/0xPliny/forge-framework/blob/main/LICENSE"><img src="https://img.shields.io/github/license/0xPliny/forge-framework?style=for-the-badge&color=00d4ff" alt="License"></a>
+</p>
+
 # FORGE — Framework for Orchestrated, Repeatable, Governed Engineering
 
 > **Turn raw AI capability into reliable engineering output.**
