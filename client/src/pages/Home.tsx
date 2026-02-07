@@ -38,15 +38,11 @@ export default function Home() {
           >
             <div className="inline-flex items-center gap-2 px-3 py-1 border border-cyan-500/30 bg-cyan-500/5 text-cyan-400 text-xs font-mono tracking-wider">
               <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
-              SYSTEMS ONLINE
+              ENTERPRISE GRADE
             </div>
             
             <h1 className="font-display text-5xl md:text-7xl font-bold leading-tight text-white">
-              ORDER FROM <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 text-glow">
-                CHAOS
-              </span>
-            </h1>
+          ORCHESTRATED <br />\n              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-600 text-glow">\n                INTELLIGENCE\n              </span>           </h1>
             
             <p className="text-slate-400 text-lg md:text-xl max-w-xl leading-relaxed">
               Framework for Orchestrated, Repeatable, Governed Engineering. 
@@ -55,7 +51,7 @@ export default function Home() {
             
             <div className="flex flex-wrap gap-4">
               <Button className="h-12 px-8 bg-cyan-500 hover:bg-cyan-400 text-black font-bold rounded-none tracking-wide">
-                INITIATE PROTOCOL
+                GET STARTED
               </Button>
               <Button variant="outline" className="h-12 px-8 border-slate-700 text-slate-300 hover:border-cyan-500/50 hover:text-cyan-400 rounded-none font-mono">
                 VIEW DOCUMENTATION
@@ -76,7 +72,7 @@ export default function Home() {
               <div className="absolute -top-10 -right-10 p-4 bg-[#0a0e1a]/90 border border-cyan-500/30 backdrop-blur-md">
                 <div className="flex items-center gap-3 mb-2">
                   <Terminal className="w-4 h-4 text-cyan-400" />
-                  <span className="text-xs font-mono text-cyan-400">SYSTEM_STATUS</span>
+                  <span className="text-xs font-mono text-cyan-400">SYSTEM_METRICS</span>
                 </div>
                 <div className="space-y-1 font-mono text-xs text-slate-400">
                   <div className="flex justify-between gap-8"><span>CORE</span><span className="text-green-400">ONLINE</span></div>
@@ -176,7 +172,7 @@ export default function Home() {
       <section id="tools" className="py-32">
         <div className="container mx-auto px-6">
           <div className="text-center mb-20">
-            <h2 className="font-display text-4xl font-bold text-white mb-4">THE ARSENAL</h2>
+            <h2 className="font-display text-4xl font-bold text-white mb-4">TECHNOLOGY STACK</h2>
             <p className="text-slate-400">Powered by a modern stack of specialized tools.</p>
           </div>
           
@@ -210,7 +206,7 @@ export default function Home() {
             <span className="font-display font-bold text-slate-500">FORGE FRAMEWORK</span>
           </div>
           <div className="text-slate-600 text-sm font-mono">
-            © 2026 Chase Logan. All systems operational.
+            © 2026 Chase Logan. Empowering AI Engineering.
           </div>
         </div>
       </footer>
