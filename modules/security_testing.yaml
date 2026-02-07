@@ -1,0 +1,58 @@
+# Security Testing Domain Module
+# For use with FORGE Framework
+
+metadata:
+  name: "security_testing"
+  version: "1.0"
+  description: "Standards and practices for security assessment and penetration testing"
+  framework: "FORGE"
+
+applicable_to:
+  contexts:
+    - "security assessment"
+    - "penetration testing"
+    - "vulnerability analysis"
+    - "code review for security"
+    - "threat modeling"
+
+standards:
+  required:
+    - id: "SEC-REQ-001"
+      name: "OWASP Methodology"
+      description: "Follow OWASP testing methodology for web application security"
+
+    - id: "SEC-REQ-002"
+      name: "CVSS Scoring"
+      description: "Score all findings using CVSS v3.1 framework"
+
+    - id: "SEC-REQ-003"
+      name: "Proof of Concept"
+      description: "Provide proof-of-concept for all findings above Medium severity"
+
+    - id: "SEC-REQ-004"
+      name: "Remediation Guidance"
+      description: "Include specific remediation steps for every finding"
+
+  recommended:
+    - id: "SEC-REC-001"
+      name: "Scope Documentation"
+      description: "Document scope, methodology, and limitations before testing"
+
+    - id: "SEC-REC-002"
+      name: "Evidence Preservation"
+      description: "Capture screenshots, logs, and request/response pairs as evidence"
+
+quality_gates:
+  completeness:
+    threshold: 0.95
+    measures:
+      - "All in-scope targets tested"
+      - "All OWASP categories covered"
+      - "All findings documented with evidence"
+
+  accuracy:
+    threshold: 0.98
+    measures:
+      - "All findings verified and reproducible"
+      - "CVSS scores accurate"
+      - "No false positives in final report"

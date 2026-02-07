@@ -1,0 +1,421 @@
+# Research & Analysis Domain Module
+
+metadata:
+  name: "research_analysis"
+  version: "1.0"
+  description: "Academic research, data analysis, literature review, and investigative work"
+  author: "Universal Framework"
+  last_updated: "2025-12-20"
+
+applicable_to:
+  file_extensions:
+    - ".py"  # For data analysis scripts
+    - ".ipynb"  # Jupyter notebooks
+    - ".r"  # R scripts
+    - ".sql"  # Data queries
+  keywords:
+    - "research"
+    - "study"
+    - "hypothesis"
+    - "methodology"
+    - "literature"
+    - "findings"
+    - "data"
+    - "analysis"
+    - "investigate"
+    - "correlation"
+    - "experiment"
+  context_signals:
+    - "Academic context"
+    - "Data science"
+    - "Investigation"
+    - "Evidence gathering"
+
+# ============================================
+# STANDARDS
+# ============================================
+standards:
+  required:
+    - id: "RES-REQ-001"
+      name: "Cite Sources"
+      description: "All claims must be traceable to sources"
+      example: |
+        ✅ CORRECT:
+        "Studies show that remote workers are 13% more productive 
+        (Bloom et al., 2015, Stanford GSB Working Paper)."
+        
+        ❌ WRONG:
+        "Studies show that remote workers are more productive."
+        
+    - id: "RES-REQ-002"
+      name: "Define Methodology"
+      description: "Research approach must be explicitly stated and justified"
+      example: |
+        ✅ CORRECT:
+        "Methodology: Qualitative analysis of 15 semi-structured interviews
+         Justification: Exploratory research goal requires depth over breadth
+         Limitations: Results may not generalize to larger populations"
+        
+    - id: "RES-REQ-003"
+      name: "Distinguish Correlation from Causation"
+      description: "Never claim causation from correlational data alone"
+      example: |
+        ✅ CORRECT:
+        "The data shows a strong correlation (r=0.78) between X and Y.
+         However, this association does not establish that X causes Y.
+         Possible confounding factors include: A, B, C."
+        
+        ❌ WRONG:
+        "X causes Y (r=0.78)."
+        
+    - id: "RES-REQ-004"
+      name: "Report Limitations"
+      description: "Every analysis must acknowledge its limitations"
+      example: |
+        ✅ CORRECT:
+        "Limitations:
+         - Sample size (n=50) limits statistical power
+         - Self-reported data may have response bias
+         - Study period (3 months) may miss seasonal effects
+         - Convenience sampling limits generalizability"
+
+    - id: "RES-REQ-005"
+      name: "Use Appropriate Statistical Methods"
+      description: "Statistical tests must match data type and assumptions"
+      example: |
+        ✅ CORRECT:
+        "Data is non-normally distributed (Shapiro-Wilk p<0.05), 
+         therefore using Mann-Whitney U test instead of t-test."
+        
+        ❌ WRONG:
+        "Using t-test for comparison." (without checking assumptions)
+
+  forbidden:
+    - id: "RES-FORBID-001"
+      pattern: "p-hacking / data dredging"
+      reason: "Inflates false positive rate, undermines validity"
+      alternative: "Pre-register hypotheses, report all tests conducted"
+      
+    - id: "RES-FORBID-002"
+      pattern: "Cherry-picking data"
+      reason: "Creates biased conclusions"
+      alternative: "Report all data, including unfavorable results"
+      
+    - id: "RES-FORBID-003"
+      pattern: "Claiming statistical significance as practical significance"
+      reason: "Large samples can make tiny effects 'significant'"
+      alternative: "Report effect sizes and confidence intervals"
+      
+    - id: "RES-FORBID-004"
+      pattern: "Unstated selection criteria"
+      reason: "Hidden criteria bias results"
+      alternative: "Document and justify all inclusion/exclusion criteria"
+
+  recommended:
+    - id: "RES-REC-001"
+      name: "Pre-register Hypotheses"
+      description: "State hypotheses before analyzing data"
+      example: "Hypothesis registered before data collection: We expect..."
+      
+    - id: "RES-REC-002"
+      name: "Report Effect Sizes"
+      description: "Include practical significance measures, not just p-values"
+      example: "r = 0.45 (medium effect), 95% CI [0.32, 0.58], p < 0.001"
+      
+    - id: "RES-REC-003"
+      name: "Include Replication Information"
+      description: "Provide enough detail for others to replicate"
+      example: "Full methodology, data collection instruments, and analysis code available at..."
+
+# ============================================
+# QUALITY GATES
+# ============================================
+quality_gates:
+  completeness:
+    threshold: 0.95
+    measures:
+      - "Research question clearly stated"
+      - "Methodology fully described"
+      - "All relevant data analyzed"
+      - "Limitations acknowledged"
+      - "Sources cited for all claims"
+      
+  accuracy:
+    threshold: 0.98
+    measures:
+      - "Statistical methods appropriate"
+      - "Calculations verifiable"
+      - "Citations accurate"
+      - "Data correctly interpreted"
+    
+  consistency:
+    threshold: 0.95
+    measures:
+      - "Methods match stated methodology"
+      - "Conclusions follow from data"
+      - "No internal contradictions"
+  
+  objectivity:
+    threshold: 0.90
+    measures:
+      - "Alternative interpretations considered"
+      - "Null results reported"
+      - "Conflicts of interest disclosed"
+      - "Limitations honestly assessed"
+
+# ============================================
+# PERSONAS
+# ============================================
+personas:
+  - name: "Research Analyst"
+    role: "Rigorous investigator who follows evidence wherever it leads"
+    expertise: 
+      - "Research design"
+      - "Statistical analysis"
+      - "Literature review"
+      - "Data interpretation"
+      - "Academic writing"
+    style: |
+      - Evidence-driven conclusions
+      - Methodological rigor
+      - Acknowledges uncertainty
+      - Distinguishes fact from interpretation
+    when_to_use: "Research projects, data analysis, literature reviews"
+    prompt: |
+      You are a Research Analyst with expertise in rigorous investigation.
+      
+      Your approach:
+      1. Start with clear research question
+      2. Define methodology before analysis
+      3. Follow evidence, not preconceptions
+      4. Cite sources for all claims
+      5. Distinguish correlation from causation
+      6. Report limitations honestly
+      7. Provide effect sizes, not just p-values
+      
+      You maintain scientific rigor while communicating clearly.
+
+  - name: "Data Scientist"
+    role: "Expert in extracting insights from data"
+    expertise:
+      - "Statistical analysis"
+      - "Data visualization"
+      - "Machine learning"
+      - "Python/R programming"
+      - "SQL and databases"
+    style: |
+      - Code is reproducible
+      - Visualizations are clear
+      - Findings are validated
+      - Assumptions are checked
+    when_to_use: "Data analysis, modeling, quantitative research"
+    prompt: |
+      You are a Data Scientist who extracts meaningful insights from data.
+      
+      You ALWAYS:
+      - Check data quality before analysis
+      - Validate statistical assumptions
+      - Use appropriate methods for data type
+      - Visualize distributions before modeling
+      - Report confidence intervals and effect sizes
+      - Make code reproducible
+      - Document your methodology
+
+# ============================================
+# PATTERNS
+# ============================================
+common_patterns:
+  - name: "Systematic Literature Review"
+    category: "research"
+    problem: "Synthesizing existing research on a topic"
+    solution: |
+      1. Define research question with PICO framework
+      2. Develop search strategy (databases, keywords, date range)
+      3. Document inclusion/exclusion criteria
+      4. Screen titles → abstracts → full text
+      5. Extract data using standardized form
+      6. Assess quality of included studies
+      7. Synthesize findings (narrative or meta-analysis)
+    example: |
+      Research Question: What is the effect of remote work on productivity?
+      
+      Search Strategy:
+      - Databases: Google Scholar, JSTOR, SSRN
+      - Keywords: "remote work" AND "productivity"
+      - Date range: 2015-2024
+      
+      Inclusion: Empirical studies, peer-reviewed, English
+      Exclusion: Opinion pieces, case studies < 10 participants
+      
+      Results: 47 studies identified → 23 met criteria
+      Synthesis: Meta-analysis showed pooled effect size d=0.15
+
+  - name: "Exploratory Data Analysis (EDA)"
+    category: "analysis"
+    problem: "Understanding a new dataset"
+    solution: |
+      1. Check data dimensions and types
+      2. Examine missing values pattern
+      3. Generate summary statistics
+      4. Visualize distributions (histograms, box plots)
+      5. Explore relationships (scatter plots, correlations)
+      6. Identify outliers
+      7. Form hypotheses for confirmatory analysis
+    example: |
+      import pandas as pd
+      import matplotlib.pyplot as plt
+      
+      # Load and inspect
+      df = pd.read_csv('data.csv')
+      print(df.info())
+      print(df.describe())
+      
+      # Missing values
+      print(df.isnull().sum())
+      
+      # Distributions
+      df.hist(figsize=(12, 8))
+      plt.show()
+      
+      # Correlations
+      print(df.corr())
+
+  - name: "Hypothesis Testing Framework"
+    category: "statistics"
+    problem: "Testing whether an effect exists"
+    solution: |
+      1. State null and alternative hypotheses
+      2. Choose significance level (α)
+      3. Select appropriate test for data type
+      4. Check test assumptions
+      5. Calculate test statistic
+      6. Interpret p-value and effect size
+      7. Report results with confidence interval
+    example: |
+      H0: No difference in productivity between groups (μ1 = μ2)
+      H1: Remote workers more productive (μ1 > μ2)
+      α = 0.05
+      
+      Test selection: 
+      - Continuous outcome, two groups → t-test or Mann-Whitney
+      - Check normality first
+      
+      Results:
+      t(98) = 2.34, p = 0.021, d = 0.47 [0.08, 0.86]
+      
+      Interpretation: Remote workers showed significantly higher 
+      productivity with a medium effect size.
+
+# ============================================
+# ANTI-PATTERNS
+# ============================================
+anti_patterns:
+  - name: "HARKing"
+    description: "Hypothesizing After Results are Known"
+    why_bad: |
+      - Presents post-hoc hypotheses as a priori
+      - Inflates apparent success rate
+      - Undermines scientific integrity
+    alternative: "Pre-register hypotheses; clearly label exploratory analyses"
+    detection: "Hypothesis perfectly predicts results; no null findings"
+
+  - name: "Garden of Forking Paths"
+    description: "Making undisclosed analysis decisions that affect results"
+    why_bad: |
+      - Many researcher degrees of freedom
+      - Each decision can be optimized for desired result
+      - Results not reproducible with different choices
+    alternative: "Pre-specify analysis plan; report all decisions made"
+    detection: "Vague methodology; results seem 'too clean'"
+
+  - name: "Overreliance on Statistical Significance"
+    description: "Using p < 0.05 as only criterion for importance"
+    why_bad: |
+      - Ignores effect size (a tiny effect can be 'significant')
+      - Binary thinking loses nuance
+      - Publication bias toward 'significant' results
+    alternative: "Report effect sizes, confidence intervals, practical significance"
+    detection: "Reports p-values without effect sizes"
+
+# ============================================
+# TOOLS & COMMANDS
+# ============================================
+# NOTE: CLI tools are not yet implemented. This is a future specification.
+# The framework is currently prompt-based. See docs/IMPLEMENTATION_STATUS.md
+# tools:
+#   data_validation:
+#     command: "Run data quality checks before analysis"
+#     expected_output: "Summary of missing values, outliers, data types"
+#     
+#   statistical_tests:
+#     command: "Match test to data characteristics"
+#     expected_output: "Appropriate test selected with assumptions checked"
+
+# ============================================
+# EXAMPLES
+# ============================================
+examples:
+  good_example:
+    description: "Well-structured research finding"
+    code: |
+      ## Finding: Remote Work and Productivity
+      
+      ### Research Question
+      Does remote work arrangement affect employee productivity?
+      
+      ### Methodology
+      - Design: Cross-sectional survey with performance data linkage
+      - Sample: n=342 knowledge workers (187 remote, 155 office)
+      - Measures: 
+        - Productivity: 360-degree performance ratings (1-5 scale)
+        - Controls: tenure, role, department, manager
+      - Analysis: ANCOVA with propensity score matching
+      
+      ### Results
+      Remote workers showed higher productivity ratings:
+      - Remote: M=3.72, SD=0.64
+      - Office: M=3.45, SD=0.71
+      - Difference: 0.27 points, 95% CI [0.12, 0.42]
+      - Effect size: d=0.40 (small-medium)
+      - F(1, 338)=11.24, p=0.001
+      
+      ### Interpretation
+      Remote workers showed moderately higher productivity ratings. 
+      However, this is correlational—we cannot conclude remote work 
+      *causes* higher productivity. Self-selection is likely: 
+      employees who choose/are allowed remote work may differ 
+      systematically from those who don't.
+      
+      ### Limitations
+      1. Cross-sectional design cannot establish causation
+      2. Self-selection bias not fully controlled
+      3. Performance ratings may have halo effect
+      4. Single organization limits generalizability
+      
+      ### Implications
+      Results support, but do not prove, productivity benefits of 
+      remote work. Recommend longitudinal study with randomization 
+      to establish causal effect.
+    why_good:
+      - "Clear research question"
+      - "Methodology detailed"
+      - "Effect size and CI reported"
+      - "Correlation/causation distinguished"
+      - "Limitations acknowledged"
+      - "Conservative interpretation"
+  
+  bad_example:
+    description: "Poorly conducted analysis"
+    code: |
+      ## Remote Work Study
+      
+      We found that remote workers are more productive (p<0.05).
+      This proves companies should let everyone work remotely.
+    why_bad:
+      - "No methodology described"
+      - "No effect size reported"
+      - "Correlation presented as causation"
+      - "No limitations mentioned"  
+      - "Overreaching conclusion"
+      - "No confidence interval"
+    fixed: "See good_example above for proper research structure"

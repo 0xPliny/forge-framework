@@ -1,0 +1,468 @@
+# Web Development Domain Module
+
+metadata:
+  name: "web_development"
+  version: "1.0"
+  description: "Modern web development with React, TypeScript, Next.js, FastAPI, and Node.js"
+  author: "Universal Framework"
+  last_updated: "2025-12-20"
+
+applicable_to:
+  file_extensions:
+    - ".tsx"
+    - ".ts"
+    - ".jsx"
+    - ".js"
+    - ".css"
+    - ".html"
+    - ".py"  # For FastAPI/Flask
+  keywords:
+    - "React"
+    - "Next.js"
+    - "component"
+    - "useState"
+    - "useEffect"
+    - "FastAPI"
+    - "Express"
+    - "API"
+    - "frontend"
+    - "backend"
+  context_signals:
+    - "package.json"
+    - "node_modules"
+    - "requirements.txt"
+    - "tsconfig.json"
+
+# ============================================
+# STANDARDS
+# ============================================
+standards:
+  required:
+    - id: "WEB-REQ-001"
+      name: "Use TypeScript"
+      description: "All JavaScript code should be TypeScript for type safety"
+      example: |
+        // ✅ CORRECT
+        interface User {
+          id: string;
+          name: string;
+          email: string;
+        }
+        
+        function getUser(id: string): User | null {
+          // Implementation
+        }
+        
+    - id: "WEB-REQ-002"
+      name: "Proper Error Handling"
+      description: "All async operations must have error handling"
+      example: |
+        // ✅ CORRECT
+        try {
+          const data = await fetchData();
+          setData(data);
+        } catch (error) {
+          console.error('Failed to fetch data:', error);
+          setError('Failed to load data');
+        }
+        
+    - id: "WEB-REQ-003"
+      name: "Accessible Components"
+      description: "Interactive elements must have ARIA labels and keyboard support"
+      example: |
+        // ✅ CORRECT
+        <button
+          aria-label="Close dialog"
+          onClick={handleClose}
+          onKeyDown={handleKeyDown}
+        >
+          <CloseIcon />
+        </button>
+        
+    - id: "WEB-REQ-004"
+      name: "Component Documentation"
+      description: "Components must have JSDoc comments explaining props and purpose"
+      example: |
+        /**
+         * Displays a user profile card with avatar and details.
+         * @param user - The user object to display
+         * @param onEdit - Callback when edit button is clicked
+         */
+        function UserCard({ user, onEdit }: UserCardProps) {
+          // Implementation
+        }
+
+    - id: "WEB-REQ-005"
+      name: "API Error Responses"
+      description: "APIs must return consistent error response format"
+      example: |
+        # ✅ CORRECT (FastAPI)
+        from fastapi import HTTPException
+        
+        @app.get("/users/{user_id}")
+        async def get_user(user_id: str):
+            user = await db.get_user(user_id)
+            if not user:
+                raise HTTPException(status_code=404, detail="User not found")
+            return user
+
+  forbidden:
+    - id: "WEB-FORBID-001"
+      pattern: "any type without justification"
+      reason: "Defeats purpose of TypeScript"
+      alternative: "Define proper types or use unknown with type guards"
+      
+    - id: "WEB-FORBID-002"
+      pattern: "console.log in production code"
+      reason: "Debug code should not be in production"
+      alternative: "Use proper logging library or remove before commit"
+      
+    - id: "WEB-FORBID-003"
+      pattern: "inline styles for layout"
+      reason: "Hard to maintain and not reusable"
+      alternative: "Use CSS modules, Tailwind, or styled-components"
+      
+    - id: "WEB-FORBID-004"
+      pattern: "uncontrolled DOM manipulation"
+      reason: "Breaks React's virtual DOM reconciliation"
+      alternative: "Use refs properly or state-driven rendering"
+      
+    - id: "WEB-FORBID-005"
+      pattern: "Secrets in client-side code"
+      reason: "Exposed to users in browser"
+      alternative: "Use environment variables and server-side only"
+
+  recommended:
+    - id: "WEB-REC-001"
+      name: "Custom Hooks for Logic"
+      description: "Extract reusable logic into custom hooks"
+      example: |
+        function useLocalStorage<T>(key: string, initialValue: T) {
+          const [value, setValue] = useState<T>(() => {
+            const stored = localStorage.getItem(key);
+            return stored ? JSON.parse(stored) : initialValue;
+          });
+          // ...
+        }
+      
+    - id: "WEB-REC-002"
+      name: "Error Boundaries"
+      description: "Wrap component trees with error boundaries"
+      example: "Use React ErrorBoundary to catch and handle component errors"
+      
+    - id: "WEB-REC-003"
+      name: "Loading and Error States"
+      description: "Components fetching data should handle loading, error, and empty states"
+      example: |
+        if (isLoading) return <Skeleton />;
+        if (error) return <ErrorMessage error={error} />;
+        if (!data) return <Empty message="No data found" />;
+        return <DataDisplay data={data} />;
+
+# ============================================
+# QUALITY GATES
+# ============================================
+quality_gates:
+  completeness:
+    threshold: 0.95
+    measures:
+      - "All components have TypeScript types"
+      - "All async operations have error handling"
+      - "All interactive elements are accessible"
+      - "All components are documented"
+      
+  accuracy:
+    threshold: 0.98
+    measures:
+      - "Types correctly represent data structures"
+      - "API contracts match between frontend/backend"
+      - "State management is correct"
+    
+  consistency:
+    threshold: 0.90
+    measures:
+      - "Naming follows conventions (camelCase, PascalCase for components)"
+      - "File structure is consistent"
+      - "Import ordering is consistent"
+  
+  no_errors:
+    threshold: 1.00
+    measures:
+      - "TypeScript compiles without errors"
+      - "No console errors in browser"
+      - "All tests pass"
+
+# ============================================
+# PERSONAS
+# ============================================
+personas:
+  - name: "Senior Frontend Developer"
+    role: "Expert in React, TypeScript, and modern web development"
+    expertise: 
+      - "React and React ecosystem"
+      - "TypeScript for type-safe development"
+      - "State management (Redux, Zustand, Context)"
+      - "CSS-in-JS and modern styling"
+      - "Accessibility (a11y)"
+      - "Performance optimization"
+    style: |
+      - Writes clean, maintainable code
+      - Prioritizes user experience
+      - Thinks about edge cases
+      - Values accessibility and performance
+    when_to_use: "Frontend development, React components, UI work"
+    prompt: |
+      You are a Senior Frontend Developer with expertise in React and TypeScript.
+      
+      You ALWAYS:
+      - Use TypeScript with proper types (never 'any' without justification)
+      - Write accessible components with ARIA labels
+      - Handle loading, error, and empty states
+      - Document components with JSDoc
+      - Use custom hooks for reusable logic
+      - Think about edge cases and error handling
+      
+      Your code is clean, maintainable, and user-focused.
+
+  - name: "Backend API Developer"
+    role: "Expert in FastAPI, Node.js, and API design"
+    expertise:
+      - "FastAPI and Express"
+      - "RESTful API design"
+      - "Database integration"
+      - "Authentication/Authorization"
+      - "Error handling and logging"
+    style: |
+      - Writes robust, secure APIs
+      - Follows REST conventions
+      - Implements proper validation
+      - Handles errors gracefully
+    when_to_use: "Backend development, API design, database work"
+    prompt: |
+      You are a Senior Backend Developer specializing in API development.
+      
+      You ALWAYS:
+      - Design RESTful APIs following conventions
+      - Use proper validation (Pydantic, Zod)
+      - Return consistent error responses
+      - Implement proper authentication
+      - Log important operations
+      - Handle edge cases and errors
+      
+      Your APIs are robust, secure, and well-documented.
+
+# ============================================
+# PATTERNS
+# ============================================
+common_patterns:
+  - name: "Data Fetching Hook"
+    category: "data"
+    problem: "Fetching and caching data in React"
+    solution: |
+      Use SWR or React Query for data fetching with caching
+    example: |
+      import useSWR from 'swr';
+      
+      function useUser(id: string) {
+        const { data, error, isLoading } = useSWR(
+          `/api/users/${id}`,
+          fetcher
+        );
+        
+        return {
+          user: data,
+          isLoading,
+          isError: error,
+        };
+      }
+
+  - name: "Form Handling"
+    category: "forms"
+    problem: "Managing form state and validation"
+    solution: |
+      Use React Hook Form for complex forms
+    example: |
+      import { useForm } from 'react-hook-form';
+      
+      function LoginForm() {
+        const { register, handleSubmit, errors } = useForm();
+        
+        const onSubmit = (data: FormData) => {
+          // Handle submission
+        };
+        
+        return (
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <input {...register('email', { required: true })} />
+            {errors.email && <span>Email is required</span>}
+          </form>
+        );
+      }
+
+  - name: "API Route Handler"
+    category: "backend"
+    problem: "Consistent API endpoint structure"
+    solution: |
+      Use consistent patterns for FastAPI routes
+    example: |
+      from fastapi import APIRouter, HTTPException, Depends
+      from typing import List
+      
+      router = APIRouter(prefix="/users", tags=["users"])
+      
+      @router.get("/{user_id}", response_model=User)
+      async def get_user(
+          user_id: str,
+          db: Database = Depends(get_db)
+      ):
+          user = await db.get_user(user_id)
+          if not user:
+              raise HTTPException(404, "User not found")
+          return user
+
+# ============================================
+# ANTI-PATTERNS
+# ============================================
+anti_patterns:
+  - name: "Prop Drilling"
+    description: "Passing props through many component layers"
+    why_bad: |
+      - Hard to maintain
+      - Components become tightly coupled
+      - Changes ripple through many files
+    alternative: "Use Context, Redux, or Zustand for shared state"
+    detection: "Same prop passed through 3+ component levels"
+
+  - name: "useEffect for Everything"
+    description: "Using useEffect when simpler solutions exist"
+    why_bad: |
+      - Often causes unnecessary renders
+      - Can create subtle bugs
+      - Often there's a better pattern
+    alternative: |
+      - Derive state during render when possible
+      - Use useMemo/useCallback appropriately
+      - Use event handlers instead of effects for user actions
+    detection: "useEffect with dependencies that could be computed"
+
+  - name: "Mixing Concerns in Components"
+    description: "Components that do data fetching, business logic, AND rendering"
+    why_bad: |
+      - Hard to test
+      - Hard to reuse
+      - Violates single responsibility
+    alternative: "Separate into container (logic) and presentational (UI) components"
+    detection: "Component has fetch calls AND complex rendering"
+
+# ============================================
+# TOOLS & COMMANDS
+# ============================================
+# NOTE: CLI tools are not yet implemented. This is a future specification.
+# The framework is currently prompt-based. See docs/IMPLEMENTATION_STATUS.md
+# tools:
+#   lint:
+#     command: "npm run lint"
+#     expected_output: "No ESLint errors or warnings"
+#     
+#   type_check:
+#     command: "npx tsc --noEmit"
+#     expected_output: "No TypeScript errors"
+#     
+#   test:
+#     command: "npm test"
+#     expected_output: "All tests passing"
+#     
+#   build:
+#     command: "npm run build"
+#     expected_output: "Successful build with no errors"
+
+# ============================================
+# EXAMPLES
+# ============================================
+examples:
+  good_example:
+    description: "Well-structured React component"
+    code: |
+      import { useState, useCallback } from 'react';
+      
+      /**
+       * Displays a list of notifications with filtering.
+       * @param notifications - Array of notification objects
+       * @param onDismiss - Callback when notification is dismissed
+       */
+      interface NotificationListProps {
+        notifications: Notification[];
+        onDismiss: (id: string) => void;
+      }
+      
+      export function NotificationList({ 
+        notifications, 
+        onDismiss 
+      }: NotificationListProps) {
+        const [filter, setFilter] = useState<'all' | 'unread'>('all');
+        
+        const filtered = useMemo(() => 
+          notifications.filter(n => 
+            filter === 'all' || !n.isRead
+          ),
+          [notifications, filter]
+        );
+        
+        const handleDismiss = useCallback((id: string) => {
+          onDismiss(id);
+        }, [onDismiss]);
+        
+        if (filtered.length === 0) {
+          return <EmptyState message="No notifications" />;
+        }
+        
+        return (
+          <ul role="list" aria-label="Notifications">
+            {filtered.map(notification => (
+              <NotificationItem
+                key={notification.id}
+                notification={notification}
+                onDismiss={handleDismiss}
+              />
+            ))}
+          </ul>
+        );
+      }
+    why_good:
+      - "TypeScript interfaces defined"
+      - "JSDoc documentation"
+      - "Accessible with ARIA labels"
+      - "Handles empty state"
+      - "Proper memoization"
+  
+  bad_example:
+    description: "Component with multiple issues"
+    code: |
+      function NotificationList(props) {
+        const [data, setData] = useState();
+        
+        useEffect(() => {
+          fetch('/api/notifications')
+            .then(r => r.json())
+            .then(setData);
+        }, []);
+        
+        return (
+          <div>
+            {data.map(n => (
+              <div style={{color: 'red'}} onClick={() => props.onDismiss(n.id)}>
+                {n.message}
+              </div>
+            ))}
+          </div>
+        );
+      }
+    why_bad:
+      - "No TypeScript types (props any)"
+      - "No error handling on fetch"
+      - "No loading state"
+      - "Inline styles"
+      - "No accessibility"
+      - "No key prop on map"
+      - "Potential undefined error (data.map)"
+    fixed: "See good_example above for corrected version"

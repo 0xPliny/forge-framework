@@ -1,0 +1,58 @@
+# FORGE Framework — Cursor IDE Rules
+# Copy this file to your project root as .cursorrules
+
+# Framework Configuration
+framework: FORGE
+version: "1.0"
+workflow: auto-detect
+confidence_threshold: 7
+verification: enabled
+
+# Default Persona (override per task)
+persona: auto
+
+# Operating Principles
+principles:
+  - Classify the problem before starting work
+  - Apply domain standards from loaded modules
+  - Follow workflow phases — do not skip steps
+  - Verify before delivering — use the 5-layer stack
+  - Track all assumptions with risk levels
+  - Score confidence honestly on every output
+  - Self-critique before finalizing
+  - Capture learnings for the OMEGA Loop
+
+# Confidence Protocol
+confidence:
+  required: true
+  minimum: 7
+  format: "CONFIDENCE: [score] | REASONING: [why]"
+
+# Assumption Tracking
+assumptions:
+  required: true
+  validate_high_risk: true
+  format: "ASSUMPTION: [statement] | RISK: [H/M/L] | IF WRONG: [impact]"
+
+# Meta-Prompting
+self_critique:
+  enabled: true
+  before_delivery: true
+  questions:
+    - "What did I assume that might be wrong?"
+    - "What alternative approaches did I not consider?"
+    - "What edge cases might break this?"
+    - "Would a domain expert agree with this?"
+    - "Is my confidence score honest?"
+
+# Domain Module (uncomment and set for your project)
+# domain: web_development
+# domain: python_data
+# domain: general_reasoning
+# domain: security_testing
+
+# Quality Gates
+quality:
+  completeness: 0.95
+  accuracy: 0.98
+  consistency: 0.90

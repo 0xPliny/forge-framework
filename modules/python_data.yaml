@@ -1,0 +1,537 @@
+# Python & Data Science Domain Module
+
+metadata:
+  name: "python_data"
+  version: "1.0"
+  description: "Python development, data science, machine learning, and analytics"
+  author: "FORGE"
+  last_updated: "2025-12-20"
+
+applicable_to:
+  file_extensions:
+    - ".py"
+    - ".ipynb"
+    - ".sql"
+  keywords:
+    - "pandas"
+    - "numpy"
+    - "dataframe"
+    - "model"
+    - "sklearn"
+    - "tensorflow"
+    - "pytorch"
+    - "jupyter"
+    - "matplotlib"
+    - "analysis"
+  context_signals:
+    - "requirements.txt"
+    - "pyproject.toml"
+    - "setup.py"
+    - "data/"
+    - "notebooks/"
+
+# ============================================
+# STANDARDS
+# ============================================
+standards:
+  required:
+    - id: "PY-REQ-001"
+      name: "Type Hints for Functions"
+      description: "All functions must have type hints for parameters and return values"
+      example: |
+        # ✅ CORRECT
+        def process_data(df: pd.DataFrame, threshold: float = 0.5) -> pd.DataFrame:
+            """Process the dataframe and filter by threshold."""
+            return df[df['score'] > threshold]
+        
+        # ❌ WRONG
+        def process_data(df, threshold=0.5):
+            return df[df['score'] > threshold]
+        
+    - id: "PY-REQ-002"
+      name: "Docstrings for Public Functions"
+      description: "All public functions must have Google-style docstrings"
+      example: |
+        def calculate_metrics(data: pd.DataFrame, target_col: str) -> dict:
+            """Calculate performance metrics for the given data.
+            
+            Args:
+                data: Input DataFrame with features and target.
+                target_col: Name of the target column.
+                
+            Returns:
+                Dictionary containing accuracy, precision, recall, and F1 score.
+                
+            Raises:
+                ValueError: If target_col is not in data.
+            """
+            ...
+        
+    - id: "PY-REQ-003"
+      name: "Reproducibility Settings"
+      description: "Random seeds must be set for reproducibility"
+      example: |
+        import numpy as np
+        import random
+        import torch
+        
+        SEED = 42
+        
+        def set_seed(seed: int = SEED) -> None:
+            """Set random seeds for reproducibility."""
+            random.seed(seed)
+            np.random.seed(seed)
+            torch.manual_seed(seed)
+            if torch.cuda.is_available():
+                torch.cuda.manual_seed_all(seed)
+        
+    - id: "PY-REQ-004"
+      name: "Data Validation"
+      description: "Validate data at ingestion and transformation boundaries"
+      example: |
+        import pandera as pa
+        from pandera.typing import DataFrame, Series
+        
+        class InputSchema(pa.SchemaModel):
+            user_id: Series[int] = pa.Field(gt=0)
+            email: Series[str] = pa.Field(nullable=False)
+            score: Series[float] = pa.Field(ge=0, le=1)
+            
+            class Config:
+                coerce = True
+        
+        @pa.check_input(InputSchema)
+        def process_users(df: DataFrame[InputSchema]) -> pd.DataFrame:
+            return df.dropna()
+        
+    - id: "PY-REQ-005"
+      name: "Logging Instead of Print"
+      description: "Use logging module instead of print statements"
+      example: |
+        import logging
+        
+        logger = logging.getLogger(__name__)
+        
+        # ✅ CORRECT
+        logger.info(f"Processing {len(df)} records")
+        logger.warning(f"Missing values in column: {col}")
+        logger.error(f"Failed to process: {e}")
+        
+        # ❌ WRONG
+        print(f"Processing {len(df)} records")
+
+    - id: "PY-REQ-006"
+      name: "Configuration Management"
+      description: "Use config files or environment variables, not hardcoded values"
+      example: |
+        from dataclasses import dataclass
+        from environs import Env
+        
+        @dataclass
+        class Config:
+            data_path: str
+            model_path: str
+            batch_size: int
+            learning_rate: float
+            
+            @classmethod
+            def from_env(cls) -> "Config":
+                env = Env()
+                env.read_env()
+                return cls(
+                    data_path=env.str("DATA_PATH"),
+                    model_path=env.str("MODEL_PATH"),
+                    batch_size=env.int("BATCH_SIZE", 32),
+                    learning_rate=env.float("LR", 0.001),
+                )
+
+  forbidden:
+    - id: "PY-FORBID-001"
+      pattern: "from module import *"
+      reason: "Pollutes namespace, makes dependencies unclear"
+      alternative: "Import specific names or use module prefix"
+      
+    - id: "PY-FORBID-002"
+      pattern: "Bare except: clauses"
+      reason: "Catches all exceptions including KeyboardInterrupt"
+      alternative: "Catch specific exceptions: except ValueError as e:"
+      
+    - id: "PY-FORBID-003"
+      pattern: "Mutable default arguments"
+      reason: "Shared state across function calls causes bugs"
+      alternative: "Use None as default, create new mutable in function body"
+      
+    - id: "PY-FORBID-004"
+      pattern: "Global variables for state"
+      reason: "Makes testing hard, creates coupling"
+      alternative: "Pass state explicitly or use classes"
+      
+    - id: "PY-FORBID-005"
+      pattern: "Magic numbers without explanation"
+      reason: "Unclear intent, hard to maintain"
+      alternative: "Use named constants with explanatory names"
+      
+    - id: "PY-FORBID-006"
+      pattern: "Chained assignments with mutable objects"
+      reason: "Creates unintended shared references"
+      alternative: "Create separate objects explicitly"
+
+  recommended:
+    - id: "PY-REC-001"
+      name: "Use Pathlib for Paths"
+      description: "Use pathlib.Path instead of os.path for cross-platform compatibility"
+      example: |
+        from pathlib import Path
+        
+        data_dir = Path("data")
+        file_path = data_dir / "input.csv"
+        
+        if file_path.exists():
+            df = pd.read_csv(file_path)
+      
+    - id: "PY-REC-002"
+      name: "Context Managers for Resources"
+      description: "Use with statements for file handles, connections, etc."
+      example: |
+        # File handling
+        with open("data.csv") as f:
+            data = f.read()
+        
+        # Database connections
+        with engine.connect() as conn:
+            result = conn.execute(query)
+      
+    - id: "PY-REC-003"
+      name: "Dataclasses for Data Structures"
+      description: "Use dataclasses for plain data containers"
+      example: |
+        from dataclasses import dataclass
+        
+        @dataclass
+        class ModelConfig:
+            learning_rate: float = 0.001
+            batch_size: int = 32
+            epochs: int = 100
+            early_stopping: bool = True
+
+# ============================================
+# QUALITY GATES
+# ============================================
+quality_gates:
+  completeness:
+    threshold: 0.95
+    measures:
+      - "All functions have type hints"
+      - "All public functions have docstrings"
+      - "All data transformations have validation"
+      - "Reproducibility seeds are set"
+      
+  accuracy:
+    threshold: 0.98
+    measures:
+      - "Type hints are correct (mypy passes)"
+      - "Tests pass with high coverage (>80%)"
+      - "Data validation catches edge cases"
+    
+  consistency:
+    threshold: 0.90
+    measures:
+      - "Code follows PEP 8"
+      - "Naming conventions consistent"
+      - "Import ordering follows isort rules"
+  
+  reproducibility:
+    threshold: 1.00
+    measures:
+      - "Random seeds are set and documented"
+      - "Requirements.txt or pyproject.toml is complete"
+      - "Data versions are tracked"
+
+# ============================================
+# PERSONAS
+# ============================================
+personas:
+  - name: "DataSci"
+    role: "Senior Data Scientist"
+    expertise:
+      - "Python and pandas"
+      - "Machine learning (sklearn, PyTorch, TensorFlow)"
+      - "Statistical analysis"
+      - "Data visualization"
+      - "Jupyter notebooks"
+    style: |
+      - Writes reproducible code
+      - Documents assumptions
+      - Validates data at every step
+      - Uses type hints and tests
+    when_to_use: "Data analysis, ML modeling, statistical work"
+    prompt: |
+      You are a Senior Data Scientist with expertise in Python and machine learning.
+      
+      You ALWAYS:
+      - Set random seeds for reproducibility
+      - Validate data with explicit checks
+      - Use type hints and docstrings
+      - Log instead of print
+      - Write tests for data transformations
+      - Document assumptions and limitations
+      
+      Your code is reproducible, testable, and well-documented.
+
+  - name: "MLEngineer"
+    role: "Machine Learning Engineer"
+    expertise:
+      - "Model training and optimization"
+      - "MLOps and deployment"
+      - "Performance optimization"
+      - "Distributed computing"
+    style: |
+      - Production-focused
+      - Performance-conscious
+      - Operationally aware
+      - Monitoring-minded
+    when_to_use: "ML deployment, performance optimization, production systems"
+    prompt: |
+      You are an ML Engineer focused on production systems.
+      
+      You prioritize:
+      - Model performance and latency
+      - Reproducibility and versioning
+      - Monitoring and observability
+      - Scalability and efficiency
+      
+      Your models are production-ready with proper testing and monitoring.
+
+# ============================================
+# PATTERNS
+# ============================================
+common_patterns:
+  - name: "Data Pipeline Pattern"
+    category: "structure"
+    problem: "Processing data through multiple transformation steps"
+    solution: |
+      1. Define each transformation as a pure function
+      2. Use composition to chain transformations
+      3. Validate at input and output boundaries
+      4. Log progress and metrics at each step
+    example: |
+      from typing import Callable
+      import pandas as pd
+      
+      def pipeline(*funcs: Callable) -> Callable:
+          """Compose multiple functions into a pipeline."""
+          def composed(data: pd.DataFrame) -> pd.DataFrame:
+              result = data
+              for func in funcs:
+                  result = func(result)
+              return result
+          return composed
+      
+      # Usage
+      process_data = pipeline(
+          clean_missing_values,
+          normalize_features,
+          encode_categories,
+          validate_output,
+      )
+      
+      output = process_data(raw_df)
+
+  - name: "Experiment Tracking Pattern"
+    category: "workflow"
+    problem: "Tracking ML experiments with parameters and results"
+    solution: |
+      Use MLflow or similar tool to track experiments
+    example: |
+      import mlflow
+      
+      with mlflow.start_run():
+          # Log parameters
+          mlflow.log_params({
+              "learning_rate": config.lr,
+              "batch_size": config.batch_size,
+              "model_type": "transformer",
+          })
+          
+          # Train model
+          model = train(config)
+          
+          # Log metrics
+          mlflow.log_metrics({
+              "accuracy": eval_result.accuracy,
+              "f1_score": eval_result.f1,
+              "loss": eval_result.loss,
+          })
+          
+          # Log model
+          mlflow.sklearn.log_model(model, "model")
+
+  - name: "Feature Engineering Pattern"
+    category: "data"
+    problem: "Creating reusable feature transformations"
+    solution: |
+      Use sklearn transformers or custom classes with fit/transform
+    example: |
+      from sklearn.base import BaseEstimator, TransformerMixin
+      import pandas as pd
+      
+      class DateFeatures(BaseEstimator, TransformerMixin):
+          """Extract date features from datetime column."""
+          
+          def __init__(self, date_col: str):
+              self.date_col = date_col
+              
+          def fit(self, X: pd.DataFrame, y=None):
+              return self
+              
+          def transform(self, X: pd.DataFrame) -> pd.DataFrame:
+              X = X.copy()
+              dt = pd.to_datetime(X[self.date_col])
+              X[f"{self.date_col}_year"] = dt.dt.year
+              X[f"{self.date_col}_month"] = dt.dt.month
+              X[f"{self.date_col}_dayofweek"] = dt.dt.dayofweek
+              return X
+
+# ============================================
+# ANTI-PATTERNS
+# ============================================
+anti_patterns:
+  - name: "Leaky Abstraction in Notebooks"
+    description: "Notebooks with cells that depend on execution order"
+    why_bad: |
+      - Results not reproducible
+      - Hidden state causes bugs
+      - Hard to review and test
+    alternative: "Use functions, restart kernel and run all regularly"
+    detection: "Variables defined in later cells used in earlier cells"
+
+  - name: "DataFrame Mutation"
+    description: "Modifying DataFrames in place without explicit copy"
+    why_bad: |
+      - Creates hidden dependencies
+      - Makes debugging difficult
+      - Causes unexpected side effects
+    alternative: "Always use .copy() when modifying, return new DataFrames"
+    detection: "df['col'] = ... without prior df = df.copy()"
+
+  - name: "Train/Test Leakage"
+    description: "Using test data information during training"
+    why_bad: |
+      - Overly optimistic performance estimates
+      - Model fails in production
+      - Wasted deployment effort
+    alternative: "Strict separation, fit only on train, transform both"
+    detection: "Fitting scalers/encoders on full dataset before split"
+
+  - name: "Unversioned Data"
+    description: "Not tracking data versions used for experiments"
+    why_bad: |
+      - Cannot reproduce results
+      - Cannot debug issues
+      - Cannot compare experiments fairly
+    alternative: "Use DVC, track data hashes, version everything"
+    detection: "No data/.dvc files, no data version in experiment logs"
+
+# ============================================
+# TOOLS & COMMANDS
+# ============================================
+# NOTE: CLI tools are not yet implemented. This is a future specification.
+# The framework is currently prompt-based. See docs/IMPLEMENTATION_STATUS.md
+# tools:
+#   type_check:
+#     command: "mypy --strict src/"
+#     expected_output: "No type errors"
+#     
+#   lint:
+#     command: "ruff check src/ && black --check src/"
+#     expected_output: "No linting errors, code is formatted"
+#     
+#   test:
+#     command: "pytest --cov=src tests/"
+#     expected_output: "All tests pass, coverage >80%"
+#     
+#   notebook_check:
+#     command: "nbqa mypy notebooks/ && nbqa ruff notebooks/"
+#     expected_output: "Notebooks pass type and lint checks"
+
+# ============================================
+# EXAMPLES
+# ============================================
+examples:
+  good_example:
+    description: "Well-structured data processing function"
+    code: |
+      import logging
+      from typing import Optional
+      
+      import pandas as pd
+      import pandera as pa
+      
+      logger = logging.getLogger(__name__)
+      
+      class OutputSchema(pa.SchemaModel):
+          """Schema for processed output data."""
+          user_id: pa.typing.Series[int] = pa.Field(gt=0)
+          score: pa.typing.Series[float] = pa.Field(ge=0, le=1)
+          category: pa.typing.Series[str] = pa.Field(isin=["A", "B", "C"])
+      
+      @pa.check_output(OutputSchema)
+      def process_user_data(
+          df: pd.DataFrame,
+          score_threshold: float = 0.5,
+          fill_value: Optional[str] = None,
+      ) -> pd.DataFrame:
+          """Process user data and filter by score threshold.
+          
+          Args:
+              df: Input DataFrame with user_id, score, and category columns.
+              score_threshold: Minimum score to include (default 0.5).
+              fill_value: Value to fill missing categories (default None).
+              
+          Returns:
+              Processed DataFrame with validated schema.
+              
+          Raises:
+              pa.errors.SchemaError: If output doesn't match expected schema.
+          """
+          logger.info(f"Processing {len(df)} records with threshold {score_threshold}")
+          
+          result = df.copy()
+          
+          # Handle missing values
+          if fill_value is not None:
+              result["category"] = result["category"].fillna(fill_value)
+          
+          # Filter by threshold
+          result = result[result["score"] >= score_threshold]
+          
+          logger.info(f"Output: {len(result)} records after filtering")
+          return result
+    why_good:
+      - "Type hints on all parameters"
+      - "Comprehensive docstring"
+      - "Uses logging instead of print"
+      - "Validates output with pandera"
+      - "Uses .copy() to avoid mutation"
+      - "Handles missing values explicitly"
+  
+  bad_example:
+    description: "Common anti-patterns in data code"
+    code: |
+      import pandas as pd
+      
+      def process(df, threshold=0.5, categories=[]):
+          print(f"Processing {len(df)} records")
+          df = df[df.score > threshold]
+          if categories:
+              categories.append("processed")  # Mutates default!
+          return df
+    why_bad:
+      - "No type hints"
+      - "No docstring"
+      - "Uses print instead of logging"
+      - "Mutable default argument (categories=[])"
+      - "Modifies mutable default"
+      - "No data validation"
+      - "No .copy() before modification"
+    fixed: "See good_example above for corrected version"

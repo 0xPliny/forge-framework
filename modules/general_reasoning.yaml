@@ -1,0 +1,393 @@
+# General Reasoning Domain Module
+
+metadata:
+  name: "general_reasoning"
+  version: "1.0"
+  description: "Logical reasoning, analysis, and general problem-solving without domain-specific constraints"
+  author: "Universal Framework"
+  last_updated: "2025-12-20"
+
+applicable_to:
+  file_extensions: []  # Domain-agnostic - works with any content
+  keywords:
+    - "analyze"
+    - "decide"
+    - "compare"
+    - "evaluate"
+    - "reason"
+    - "logic"
+    - "argument"
+    - "strategy"
+    - "plan"
+  context_signals:
+    - "No clear technical domain"
+    - "Abstract problem"
+    - "Decision making"
+    - "Strategic planning"
+
+# ============================================
+# STANDARDS
+# ============================================
+standards:
+  required:
+    - id: "GEN-REQ-001"
+      name: "State Assumptions Explicitly"
+      description: "All assumptions must be clearly stated and justified"
+      example: |
+        ✅ CORRECT:
+        "This analysis assumes that:
+        1. User growth continues at current 15% monthly rate (based on last 6 months)
+        2. No major competitor enters the market (per industry reports)
+        3. Current team capacity remains stable"
+        
+    - id: "GEN-REQ-002"
+      name: "Consider Multiple Perspectives"
+      description: "Explore at least 2-3 viewpoints before concluding"
+      example: |
+        ✅ CORRECT:
+        "From the customer perspective: prioritizes ease of use
+         From the business perspective: prioritizes profitability
+         From the technical perspective: prioritizes maintainability
+         Recommendation balances all three by..."
+        
+    - id: "GEN-REQ-003"
+      name: "Separate Facts from Interpretations"
+      description: "Clearly distinguish what is known vs. what is inferred"
+      example: |
+        ✅ CORRECT:
+        "FACTS: Sales dropped 20% in Q3. Marketing spend was unchanged.
+         INTERPRETATION: The drop may be seasonal, but could indicate 
+         market saturation. Additional data needed to confirm."
+        
+    - id: "GEN-REQ-004"
+      name: "Acknowledge Uncertainty"
+      description: "State confidence levels and what could change the conclusion"
+      example: |
+        ✅ CORRECT:
+        "Confidence: MEDIUM-HIGH
+         This conclusion would change if:
+         - Competitor pricing data shows different trend
+         - Customer interviews reveal different priorities
+         - Q4 data contradicts Q3 patterns"
+
+    - id: "GEN-REQ-005"
+      name: "Structure Arguments Logically"
+      description: "Use clear logical structure: premises → reasoning → conclusion"
+      example: |
+        ✅ CORRECT:
+        "Premise 1: Our response time is 3x slower than competitors
+         Premise 2: Customer surveys cite speed as #1 priority
+         Premise 3: Churn is highest among users who experience delays
+         Reasoning: Speed directly impacts retention and competitiveness
+         Conclusion: Performance optimization should be priority #1"
+
+  forbidden:
+    - id: "GEN-FORBID-001"
+      pattern: "Unsupported claims"
+      reason: "Reduces credibility and can lead to wrong decisions"
+      alternative: "Always cite source or mark as assumption"
+      
+    - id: "GEN-FORBID-002"
+      pattern: "False dichotomies"
+      reason: "Limits solution space artificially"
+      alternative: "Explore the full range of options, not just two extremes"
+      
+    - id: "GEN-FORBID-003"
+      pattern: "Confirmation bias"
+      reason: "Cherry-picking evidence leads to flawed conclusions"
+      alternative: "Actively seek contradicting evidence"
+      
+    - id: "GEN-FORBID-004"
+      pattern: "Circular reasoning"
+      reason: "Conclusion can't be its own justification"
+      alternative: "Ensure premises are independent of conclusion"
+
+  recommended:
+    - id: "GEN-REC-001"
+      name: "Steel-man Opposing Views"
+      description: "Present the strongest version of contrary positions"
+      example: "The strongest argument AGAINST this approach would be..."
+      
+    - id: "GEN-REC-002"
+      name: "Provide Actionable Recommendations"
+      description: "Conclusions should lead to clear next steps"
+      example: |
+        "Recommendation: Invest in performance optimization
+         Action 1: Profile top 5 slowest endpoints (Week 1)
+         Action 2: Implement caching for read-heavy operations (Week 2)
+         Action 3: Set up performance monitoring (Week 3)"
+      
+    - id: "GEN-REC-003"
+      name: "Use Structured Frameworks"
+      description: "Apply proven frameworks when applicable"
+      example: |
+        Frameworks to consider:
+        - SWOT for strategic analysis
+        - 5 Whys for root cause
+        - Decision Matrix for choices
+        - First Principles for innovation
+
+# ============================================
+# QUALITY GATES
+# ============================================
+quality_gates:
+  completeness:
+    threshold: 0.90
+    measures:
+      - "All key aspects of problem addressed"
+      - "Multiple perspectives considered"
+      - "Assumptions explicitly stated"
+      - "Recommendations include next steps"
+      
+  accuracy:
+    threshold: 0.95
+    measures:
+      - "Facts are verifiable"
+      - "Logic is sound (no fallacies)"
+      - "Conclusions follow from premises"
+    
+  consistency:
+    threshold: 0.90
+    measures:
+      - "No internal contradictions"
+      - "Terminology used consistently"
+      - "Positions don't shift without explanation"
+  
+  objectivity:
+    threshold: 0.85
+    measures:
+      - "Multiple viewpoints represented"
+      - "Counterarguments addressed"
+      - "Uncertainty acknowledged"
+
+# ============================================
+# PERSONAS
+# ============================================
+personas:
+  - name: "Strategic Analyst"
+    role: "Clear thinker who breaks down complex problems"
+    expertise: 
+      - "Logical analysis"
+      - "Decision frameworks"
+      - "Root cause analysis"
+      - "Strategic planning"
+      - "Risk assessment"
+    style: |
+      - Thinks systematically
+      - Considers multiple angles
+      - Acknowledges uncertainty
+      - Provides actionable insights
+    when_to_use: "Complex decisions, strategic planning, analysis tasks"
+    prompt: |
+      You are a Strategic Analyst who excels at breaking down complex problems.
+      
+      Your approach:
+      1. Understand the problem fully before proposing solutions
+      2. State assumptions explicitly
+      3. Consider multiple perspectives
+      4. Separate facts from interpretation
+      5. Acknowledge uncertainty
+      6. Provide structured, actionable recommendations
+      
+      You use frameworks like:
+      - First Principles thinking for novel problems
+      - SWOT for strategic analysis
+      - 5 Whys for root cause identification
+      - Decision matrices for comparing options
+      
+      You avoid:
+      - Unsupported claims
+      - False dichotomies
+      - Confirmation bias
+      - Circular reasoning
+
+# ============================================
+# PATTERNS
+# ============================================
+common_patterns:
+  - name: "First Principles Analysis"
+    category: "reasoning"
+    problem: "Need to solve a novel problem without relying on conventions"
+    solution: |
+      1. Identify the fundamental truths (what do we KNOW to be true?)
+      2. Question every assumption (why do we believe this?)
+      3. Build up from basics (what can we derive from fundamentals?)
+      4. Avoid reasoning by analogy too early (don't assume this is like X)
+    example: |
+      Question: "How should we price our new product?"
+      
+      First Principles approach:
+      1. Fundamentals: 
+         - Value = benefits to customer / cost to customer
+         - Price must cover our costs for sustainability
+         - Price signals quality perception
+      
+      2. Question assumptions:
+         - "Competitors charge X" → But are we solving same problem?
+         - "Industry norm is $Y" → But is that optimal or just convention?
+      
+      3. Build from basics:
+         - Calculate our cost structure
+         - Measure actual value delivered to customer
+         - Test different price points experimentally
+
+  - name: "5 Whys Root Cause"
+    category: "analysis"
+    problem: "Finding the root cause of a problem"
+    solution: |
+      Keep asking "why" (typically 5 times) to reach root cause
+    example: |
+      Problem: Customer complaints increased
+      
+      Why 1: Response times are slow → Why?
+      Why 2: Support team is overwhelmed → Why?
+      Why 3: Ticket volume doubled last month → Why?
+      Why 4: New feature has many bugs → Why?
+      Why 5: Insufficient testing before release → ROOT CAUSE
+      
+      Solution: Improve QA process, not hire more support staff
+
+  - name: "Decision Matrix"
+    category: "decision"
+    problem: "Choosing between multiple options with various criteria"
+    solution: |
+      Create weighted scoring matrix to compare objectively
+    example: |
+      | Criteria      | Weight | Option A | Option B | Option C |
+      |---------------|--------|----------|----------|----------|
+      | Cost          | 30%    | 8 (2.4)  | 5 (1.5)  | 7 (2.1)  |
+      | Speed         | 25%    | 6 (1.5)  | 9 (2.25) | 7 (1.75) |
+      | Quality       | 25%    | 9 (2.25) | 7 (1.75) | 8 (2.0)  |
+      | Risk          | 20%    | 7 (1.4)  | 6 (1.2)  | 8 (1.6)  |
+      |---------------|--------|----------|----------|----------|
+      | TOTAL         |        | 7.55     | 6.70     | 7.45     |
+      
+      Recommendation: Option A (highest weighted score)
+
+  - name: "SWOT Analysis"
+    category: "strategic"
+    problem: "Understanding strategic position"
+    solution: |
+      Map Strengths, Weaknesses, Opportunities, Threats
+    example: |
+      | INTERNAL         | POSITIVE                | NEGATIVE               |
+      |------------------|-------------------------|------------------------|
+      | Strengths        | Strong brand, skilled   | -                      |
+      |                  | team, proven product    |                        |
+      |------------------|-------------------------|------------------------|
+      | Weaknesses       | -                       | Limited capital, slow  |
+      |                  |                         | release cycle          |
+      |------------------|-------------------------|------------------------|
+      | EXTERNAL         | POSITIVE                | NEGATIVE               |
+      |------------------|-------------------------|------------------------|
+      | Opportunities    | Growing market, weak    | -                      |
+      |                  | competitors             |                        |
+      |------------------|-------------------------|------------------------|
+      | Threats          | -                       | Regulatory changes,    |
+      |                  |                         | new entrants           |
+
+# ============================================
+# ANTI-PATTERNS
+# ============================================
+anti_patterns:
+  - name: "Analysis Paralysis"
+    description: "Over-analyzing to avoid making a decision"
+    why_bad: |
+      - Delays action indefinitely
+      - Perfect information never comes
+      - Cost of delay often exceeds benefit of more analysis
+    alternative: "Set analysis deadline, make best decision with available info, iterate"
+    detection: "Requesting more data repeatedly without new actionable insights"
+
+  - name: "Sunk Cost Fallacy"
+    description: "Continuing bad path because of prior investment"
+    why_bad: |
+      - Past costs are irretrievable regardless of future actions
+      - Only future costs and benefits matter for decisions
+    alternative: "Evaluate options based only on future outcomes"
+    detection: "Justifying continuation primarily by referencing past investment"
+
+  - name: "Anchoring"
+    description: "Over-relying on first piece of information"
+    why_bad: |
+      - Initial information may not be most relevant
+      - Biases all subsequent analysis
+    alternative: "Seek diverse information sources, consider range of values"
+    detection: "All estimates cluster near first number mentioned"
+
+# ============================================
+# EXAMPLES
+# ============================================
+examples:
+  good_example:
+    description: "Well-structured decision analysis"
+    code: |
+      ## Analysis: Should We Expand to European Market?
+      
+      ### Assumptions (stated explicitly)
+      1. Current US market growth will continue (10% YoY)
+      2. European regulatory compliance cost: ~$500K
+      3. No major currency fluctuations (using 6-month average)
+      
+      ### Multiple Perspectives
+      - **Growth view**: EU represents 2x TAM expansion opportunity
+      - **Risk view**: Regulatory complexity + currency risk substantial
+      - **Resource view**: Current team stretched; expansion could harm core
+      
+      ### Facts vs. Interpretation
+      FACTS:
+      - EU SaaS market: $50B (Statista 2024)
+      - 3 competitors already established in EU
+      - GDPR compliance required
+      
+      INTERPRETATION:
+      - Market may be saturating (competitor presence suggests this)
+      - Compliance likely underestimated (typical first-time estimates are 50% low)
+      
+      ### Recommendation
+      **Delay EU expansion 12 months**
+      
+      Confidence: MEDIUM
+      
+      Reasoning:
+      1. US growth still strong - focus on capturing more here first
+      2. Compliance costs likely higher than estimated
+      3. Team bandwidth concerns valid
+      
+      This would change if:
+      - US growth stalls below 5%
+      - Key enterprise customer requires EU presence
+      - Competitor wins major EU contracts
+      
+      ### Next Steps
+      1. Monitor US growth metrics quarterly
+      2. Begin GDPR compliance assessment (low cost, reduces future risk)
+      3. Revisit decision in Q3 2025
+    why_good:
+      - "Assumptions stated explicitly"
+      - "Multiple perspectives considered"
+      - "Facts separated from interpretation"
+      - "Confidence level stated"
+      - "Conditions for revising conclusion listed"
+      - "Actionable next steps provided"
+  
+  bad_example:
+    description: "Poor reasoning with common fallacies"
+    code: |
+      ## Analysis: EU Expansion
+      
+      We should definitely expand to Europe because:
+      - Everyone else is doing it (our competitors are there)
+      - We've already spent $100K on preliminary research
+      - Europe is a big market
+      
+      I'm confident this is the right choice.
+    why_bad:
+      - "Bandwagon fallacy (everyone is doing it)"
+      - "Sunk cost fallacy (we already spent money)"
+      - "Vague claim without quantification (big market)"
+      - "No assumptions stated"
+      - "No contrary evidence considered"
+      - "No uncertainty acknowledged"
+      - "No actionable next steps"
+    fixed: "See good_example above for proper analysis structure"
