@@ -240,16 +240,28 @@ ANALYZE  → Measure improvement against baseline
 LEARN    → Store insights for future tasks
 ```
 
-### Learning Capture Template
+### Concrete Mechanism
 
-```
-LEARNING:
-  Task: [What was done]
-  Outcome: [Result]
-  Insight: [What was learned]
-  Applies To: [Future scenarios]
-  Confidence: [How sure are we this generalizes]
-```
+OMEGA is operationalized by two persistent stores:
+
+| Store | Purpose | Schema |
+|---|---|---|
+| `telemetry/sessions.jsonl` | Mechanical log: every workflow invocation, all gates, outcomes | `telemetry/schema.json` |
+| `learnings/_index.jsonl` | Curated insights: only when something non-obvious surfaced | `learnings/schema.json` |
+
+The retrieval and write contract is defined in [`core/omega_retrieval.md`](core/omega_retrieval.md):
+
+- **At Phase 0** of every workflow, query `learnings/_index.jsonl` for entries matching the current task's category + domain + keywords. Surface the top 3 before Phase 1.
+- **At task close**, emit a telemetry line. If something non-obvious surfaced, also append a learning entry.
+
+This is what makes the self-improvement claim real instead of aspirational. Without these stores, OMEGA is a slogan — every conversation starts cold. With them, prior insight compounds.
+
+### Tools
+
+- `tools/forge_eval.py` — score a single telemetry session against the FORGE gates
+- `tools/forge_report.py` — aggregate telemetry over N days; surfaces high-iteration and non-success sessions as learning candidates
+
+See [`telemetry/README.md`](telemetry/README.md) and [`learnings/README.md`](learnings/README.md) for full usage.
 
 ---
 

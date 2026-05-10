@@ -23,3 +23,11 @@ node_modules/
 __pycache__/
 *.pyc
 .env
+
+# Telemetry (local only; schema is committed, data is not)
+telemetry/sessions.jsonl
+
+# Learnings — keep schema/README/EXAMPLES committed; ignore the actual store
+learnings/_index.jsonl
+# Per-learning deep-dive files use UUID-style names (e.g., a1b2c3d4-....md)
+learnings/[0-9a-f][0-9a-f][0-9a-f][0-9a-f]*.md

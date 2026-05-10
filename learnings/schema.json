@@ -1,0 +1,115 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/0xPliny/forge-framework/learnings/schema.json",
+  "title": "FORGE Learning Entry",
+  "description": "One JSON object per line in _index.jsonl. Captures a non-obvious insight from a completed FORGE task.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "learning_id",
+    "date",
+    "workflow",
+    "category",
+    "domain",
+    "problem_signature",
+    "what_worked",
+    "what_failed",
+    "generalization",
+    "confidence",
+    "source"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "learning_id": {
+      "type": "string",
+      "description": "UUID4. Unique per learning."
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "YYYY-MM-DD when the learning was captured."
+    },
+    "source_task_id": {
+      "type": ["string", "null"],
+      "description": "task_id from telemetry/sessions.jsonl if this learning derived from a specific session."
+    },
+    "workflow": {
+      "type": "string",
+      "enum": ["rise", "care", "harvest", "cross-cutting"]
+    },
+    "category": {
+      "type": "string",
+      "enum": ["CREATION", "TRANSFORMATION", "UNDERSTANDING", "REPAIR", "OPTIMIZATION", "cross-cutting"]
+    },
+    "domain": {
+      "type": "string",
+      "description": "Domain module name or free-form domain label."
+    },
+    "complexity": {
+      "type": ["string", "null"],
+      "enum": ["Simple", "Medium", "Complex", "Expert", null]
+    },
+    "problem_signature": {
+      "type": "object",
+      "required": ["keywords", "normalized"],
+      "additionalProperties": false,
+      "properties": {
+        "keywords": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9_-]+$"
+          },
+          "minItems": 2,
+          "maxItems": 10,
+          "description": "Lowercase keywords distilled from the task. Used for grep-based retrieval matching."
+        },
+        "normalized": {
+          "type": "string",
+          "description": "category|domain|sorted-keywords joined for fast string matching."
+        }
+      }
+    },
+    "what_worked": {
+      "type": "string",
+      "description": "What specific approach, decision, or pattern produced the outcome. Be concrete."
+    },
+    "what_failed": {
+      "type": "string",
+      "description": "What was tried and discarded, what assumptions broke, or 'n/a' if nothing failed. Often the most valuable field."
+    },
+    "generalization": {
+      "type": "string",
+      "description": "When does this learning apply? What conditions change the answer? Future-you reads this to judge relevance."
+    },
+    "applies_to": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Free-form list of category:domain pairs or scope tags (e.g., 'CREATION:ai_tooling', 'any:windows-environment')."
+    },
+    "confidence": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 10,
+      "description": "How confident are you this generalizes beyond the originating task? Use the FORGE Confidence Protocol scale."
+    },
+    "source": {
+      "type": "string",
+      "enum": ["telemetry-derived", "manual", "post-mortem"],
+      "description": "How this learning was captured. telemetry-derived = mined from a sessions.jsonl entry; manual = added directly by the user; post-mortem = retrospective on completed work."
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "Free-form tags for filtering and discovery."
+    },
+    "deep_dive_path": {
+      "type": ["string", "null"],
+      "description": "Optional relative path to a companion .md file with richer context (e.g., 'learnings/2026-05-10-skill-vs-hook.md')."
+    }
+  }
+}
