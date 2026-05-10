@@ -1,7 +1,7 @@
 # FORGE Master Framework
 
 > **Framework for Orchestrated, Repeatable, Governed Engineering**
-> Version 1.0 | Created by Chase Logan
+> Version 1.1 | Created by Chase Logan
 
 ---
 
@@ -312,5 +312,5 @@ Each persona inherits all FORGE protocols (Confidence, Assumptions, Meta-Prompti
 
 ---
 
-*FORGE v1.0 — Framework for Orchestrated, Repeatable, Governed Engineering*
+*FORGE v1.1 — Framework for Orchestrated, Repeatable, Governed Engineering*
 *Created by Chase Logan*
