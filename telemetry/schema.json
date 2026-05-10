@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/0xPliny/forge-framework/telemetry/schema.json",
+  "title": "FORGE Session Telemetry",
+  "description": "One JSON object per line in sessions.jsonl. Emitted by /rise, /care, /harvest at task close.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "task_id",
+    "timestamp",
+    "classification",
+    "workflow",
+    "assumptions_count",
+    "iterations",
+    "gates_passed",
+    "gates_failed",
+    "outcome",
+    "prompt_hash"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "task_id": {
+      "type": "string",
+      "description": "UUID4. Unique per workflow invocation."
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 UTC timestamp at task close."
+    },
+    "classification": {
+      "type": "object",
+      "required": ["category", "complexity", "domain", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "category": {
+          "type": "string",
+          "enum": ["CREATION", "TRANSFORMATION", "UNDERSTANDING", "REPAIR", "OPTIMIZATION"]
+        },
+        "complexity": {
+          "type": "string",
+          "enum": ["Simple", "Medium", "Complex", "Expert"]
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain module name or 'general' / 'other'."
+        },
+        "confidence": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10
+        }
+      }
+    },
+    "workflow": {
+      "type": "string",
+      "enum": ["rise", "care", "harvest"]
+    },
+    "persona": {
+      "type": ["string", "null"],
+      "enum": ["atlas", "sage", "scribe", "sentinel", null]
+    },
+    "assumptions_count": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "iterations": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Iteration count (relevant for C-A-R-E loops; default 1 for R-I-S-E and HARVEST)."
+    },
+    "gates_passed": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "classification",
+          "confidence_protocol",
+          "assumption_tracking",
+          "meta_prompting",
+          "verification_layer_1",
+          "verification_layer_2",
+          "verification_layer_3",
+          "verification_layer_4",
+          "verification_layer_5",
+          "phase_0_retrieval",
+          "learnings_emitted"
+        ]
+      }
+    },
+    "gates_failed": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "wall_time_sec": {
+      "type": ["number", "null"],
+      "minimum": 0
+    },
+    "tokens_in": {
+      "type": ["integer", "null"],
+      "minimum": 0
+    },
+    "tokens_out": {
+      "type": ["integer", "null"],
+      "minimum": 0
+    },
+    "outcome": {
+      "type": "string",
+      "enum": ["success", "partial", "failed", "escalated"],
+      "description": "success = all gates passed; partial = some gates failed but task delivered; failed = task not delivered; escalated = handed off to different workflow."
+    },
+    "prompt_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{16,64}$",
+      "description": "SHA-256 of the raw user prompt, hex-encoded. First 16 chars minimum."
+    },
+    "raw_prompt": {
+      "type": ["string", "null"],
+      "description": "Only populated if FORGE_TELEMETRY_RAW=1 environment variable is set. Privacy-sensitive."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Free-form AI commentary on what worked, what failed, what to improve. Mined by Plan 1 (learnings store)."
+    }
+  }
+}

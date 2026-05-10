@@ -29,11 +29,13 @@ Most teams use AI as a chatbot. FORGE treats AI as an **engineering tool** with:
 - **Governance and verification** — not blind trust
 - **Measurable outcomes** — not anecdotal wins
 
-**Real-world results:**
-- 21x developer efficiency improvement (measured across production deployments)
+**Reported results from the framework author's deployments:**
+- 21x developer efficiency improvement
 - $0.002/line cost for trained AI workflows vs $0.014/line untrained
 - 56x documentation speed improvement
 - 240x standards-checking acceleration
+
+These figures are from one operator's deployments across industrial automation, legacy modernization, and enterprise software — directional, not independently benchmarked. Reproduce them in your own environment with the [telemetry stack](telemetry/); see [`telemetry/METHODOLOGY.md`](telemetry/METHODOLOGY.md) for the measurement protocol.
 
 ---
 
@@ -75,9 +77,9 @@ FORGE/
 ├── QUICK_START.md               # 5-minute getting started guide
 │
 ├── workflows/                   # HOW to think
-│   ├── rise.md                  # Research → Implement → Synthesize → Execute
-│   ├── care.md                  # Collect → Analyze → Refine → Execute
-│   ├── harvest.md               # Documentation & understanding
+│   ├── rise.md                  # Research → Identify → Synthesize → Execute
+│   ├── care.md                  # Context → Analyze → Respond → Evaluate
+│   ├── harvest.md               # Documentation & knowledge extraction
 │   ├── omega_loop.md            # Self-improving feedback loop
 │   ├── problem_classifier.md    # Automatic problem categorization
 │   ├── verification.md          # 5-layer correctness stack
@@ -94,35 +96,55 @@ FORGE/
 │   ├── meta_prompting.md        # Self-critique before delivery
 │   ├── confidence_protocol.md   # Explicit confidence scoring
 │   ├── assumption_tracker.md    # Track and validate assumptions
-│   └── orchestration.md         # Multi-agent coordination
+│   ├── orchestration.md         # Multi-agent coordination
+│   └── omega_retrieval.md       # Persistent learnings query + write protocol
 │
 ├── modules/                     # WHAT standards to follow
-│   ├── domain_module_template.md # Template for creating new modules
-│   ├── web_development.yaml     # React, TypeScript, FastAPI
-│   ├── python_data.yaml         # Python, pandas, ML
-│   ├── general_reasoning.yaml   # Logic, decisions, analysis
-│   ├── research_analysis.yaml   # Research methodology
-│   └── security_testing.yaml    # Security assessment standards
+│   ├── domain_module_template.md
+│   ├── web_development.yaml
+│   ├── python_data.yaml
+│   ├── general_reasoning.yaml
+│   ├── research_analysis.yaml
+│   └── security_testing.yaml
 │
 ├── execution/                   # Runtime engine
-│   ├── session_manager.md       # Persistent state management
-│   ├── checkpoint_manager.md    # Git-based checkpointing
-│   ├── audit_system.md          # Crash-safe logging
-│   ├── error_handling.md        # Retry logic & error categories
-│   └── parallel_agents.md       # Multi-agent orchestration
+│   ├── session_manager.md
+│   ├── checkpoint_manager.md
+│   ├── audit_system.md
+│   └── error_handling.md
 │
 ├── templates/                   # Reusable document templates
-│   ├── rise/                    # R-I-S-E phase templates
-│   ├── care/                    # C-A-R-E phase templates
-│   ├── harvest/                 # Documentation templates
-│   └── security/                # Security report templates
+│   ├── rise/, care/, harvest/, security/, omega/
+│
+├── telemetry/                   # OMEGA: mechanical session log
+│   ├── schema.json              # JSON Schema for sessions.jsonl
+│   ├── README.md                # Privacy, opt-out, usage
+│   ├── METHODOLOGY.md           # How to reproduce the README's headline figures
+│   └── sessions.jsonl           # Append-only log (gitignored — local only)
+│
+├── learnings/                   # OMEGA: curated insights
+│   ├── schema.json              # JSON Schema for learning entries
+│   ├── README.md                # Schema + retrieval contract + when-to-write
+│   ├── EXAMPLES.md              # Curated examples for upstream users
+│   └── _index.jsonl             # Append-only learnings (gitignored)
+│
+├── tools/                       # Python stdlib tools (no deps)
+│   ├── forge_eval.py            # Score a single session against FORGE gates
+│   └── forge_report.py          # Aggregate telemetry over N days
+│
+├── integrations/                # IDE / runtime integrations
+│   ├── browser_automation.md
+│   ├── mcp_integration.md
+│   ├── tool_validation.md
+│   └── claude-code/             # Native Claude Code: slash commands + skill
+│       ├── README.md            # Install instructions (~/.claude/...)
+│       ├── commands/            # /rise, /care, /harvest, /atlas, /sage, /scribe, /sentinel
+│       └── skills/forge-classifier/SKILL.md  # Auto-suggests routing
 │
 ├── .cursorrules-templates/      # IDE governance rules
-│   └── base.cursorrules         # Base Cursor IDE rules
+│   └── base.cursorrules
 │
-└── docs/                        # Deep documentation
-    ├── theory/                  # Mathematical foundations
-    └── examples/                # Usage examples
+└── docs/                        # Built docs site (gh-pages source)
 ```
 
 ---
@@ -256,7 +278,25 @@ Generate comprehensive, structured documentation for any codebase using GPT-4 an
 
 ## IDE Integration
 
-FORGE includes `.cursorrules` templates for governing AI behavior directly in your IDE:
+### Claude Code (native)
+
+Slash commands and a classifier skill that remove the "paste FORGE_MASTER.md into chat" friction. Once installed, invoke workflows and personas as first-class commands:
+
+```
+/rise build a notification filtering system
+/care fix the race condition in the order queue
+/harvest document the auth subsystem
+/atlas DEEP technical — "warehouse automation patterns"
+/sage FULL — "real-time notification system for 1M users"
+```
+
+The `forge-classifier` skill auto-suggests routing for unrouted tasks — describe a task without a slash command and it recommends one.
+
+Install: see [`integrations/claude-code/README.md`](integrations/claude-code/).
+
+### Cursor / Windsurf / other rules-file IDEs
+
+FORGE includes `.cursorrules` templates for governing AI behavior:
 
 ```yaml
 # .cursorrules example
@@ -269,6 +309,20 @@ persona: sage
 ```
 
 Works with **Cursor**, **Windsurf**, and any AI-assisted IDE that supports rules files.
+
+---
+
+## OMEGA: Operational Stack
+
+The OMEGA loop (self-improvement) is operationalized by two persistent stores plus a small Python toolchain:
+
+| Layer | What it does | Where |
+|---|---|---|
+| **Telemetry** | Mechanical log: every workflow invocation — classification, gates, assumptions, iterations, outcome | [`telemetry/sessions.jsonl`](telemetry/) |
+| **Learnings** | Curated insights — only when something non-obvious surfaced. Queried at Phase 0 of every workflow. | [`learnings/_index.jsonl`](learnings/) |
+| **Tools** | `forge_eval.py` (single-session scorer) + `forge_report.py` (N-day aggregator) | [`tools/`](tools/) |
+
+The retrieval + write contract is in [`core/omega_retrieval.md`](core/omega_retrieval.md). With these stores active, workflow invocations compound prior insight instead of starting cold every time.
 
 ---
 
