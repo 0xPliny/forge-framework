@@ -13,12 +13,13 @@
 
 ### 🎯 Turn raw AI capability into reliable engineering output.
 
-`status` &nbsp;🟢 **Stable v1.1** &nbsp;&nbsp; `license` &nbsp;📄 **Apache 2.0** &nbsp;&nbsp; `scope` &nbsp;🌐 **Open Source** &nbsp;&nbsp; `author` &nbsp;👤 **Chase Logan**
+`status` &nbsp;🟢 **Stable v1.1** &nbsp;&nbsp; `license` &nbsp;📄 **Apache 2.0** &nbsp;&nbsp; `scope` &nbsp;🌐 **Open Source** &nbsp;&nbsp; `author` &nbsp;👤 **0xPliny**
 
 <p>
   <a href="https://github.com/0xPliny/forge-framework/stargazers"><img src="https://img.shields.io/github/stars/0xPliny/forge-framework?style=for-the-badge&logo=github&color=00d4ff&logoColor=white" alt="Stars"></a>
   <a href="https://github.com/0xPliny/forge-framework/network/members"><img src="https://img.shields.io/github/forks/0xPliny/forge-framework?style=for-the-badge&logo=github&color=00d4ff&logoColor=white" alt="Forks"></a>
   <a href="https://github.com/0xPliny/forge-framework/blob/main/LICENSE"><img src="https://img.shields.io/github/license/0xPliny/forge-framework?style=for-the-badge&color=00d4ff" alt="License"></a>
+  <a href="https://github.com/0xPliny/forge-framework/actions/workflows/ci.yml"><img src="https://github.com/0xPliny/forge-framework/actions/workflows/ci.yml/badge.svg" alt="CI"></a>
 </p>
 
 <p>
@@ -315,7 +316,7 @@ PRs welcome. Open an issue first for substantial changes.
 
 ## 👤 About
 
-FORGE was developed by **[Chase Logan](https://github.com/0xPliny)** through hands-on experience deploying AI-driven engineering workflows across industrial automation and enterprise software. It distills domain-agnostic patterns for making AI a reliable engineering partner — not just a code generator.
+FORGE was developed by **[0xPliny](https://github.com/0xPliny)** through hands-on experience deploying AI-driven engineering workflows across industrial automation and enterprise software. It distills domain-agnostic patterns for making AI a reliable engineering partner — not just a code generator.
 
 🌐 [GitHub →](https://github.com/0xPliny) &nbsp;·&nbsp; 🏷️ Framework v1.1
 
