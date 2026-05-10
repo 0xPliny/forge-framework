@@ -1,0 +1,21 @@
+{
+  "$schema": "https://claude.ai/settings.schema.json",
+  "_comment": "Project-level Claude Code settings for the FORGE repo. Allows safe read-only inspection plus running FORGE's own Python tools without permission prompts. Destructive operations still require confirmation.",
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git ls-files:*)",
+      "Bash(python tools/forge_eval.py:*)",
+      "Bash(python tools/forge_report.py:*)",
+      "Bash(python3 tools/forge_eval.py:*)",
+      "Bash(python3 tools/forge_report.py:*)",
+      "Read",
+      "Glob",
+      "Grep"
+    ]
+  }
+}
