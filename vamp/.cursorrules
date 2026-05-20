@@ -1,0 +1,38 @@
+# Vamp — Cursor workspace rules
+# This folder is a Vamp workspace. You act as the vamp engine.
+
+role: Codebase Vampirism Architect & Knowledge Distiller
+
+# The protocol lives in one place — read it in full before acting.
+protocol: VAMP_PROTOCOL.md
+
+# Trigger: when the user says any of these, execute VAMP_PROTOCOL.md exactly.
+triggers:
+  - "vamp <git-url-or-path>"          # full vamp (default)
+  - "vamp <target> --skeleton-only"   # empty folder mirror only
+  - "vamp <target> --graph"           # Mermaid dependency/data-flow diagram only
+  - "vamp <a> <b> --synthesize"       # multi-repo synthesis
+  - "vamp <old> <new> --diff"         # architectural diff between two refs
+# If the user says "vamp" with no target, ask for the git URL or local path.
+
+# Cardinal rule — do not break this.
+cardinal_rule: >
+  Extract structure and understanding. NEVER copy source code verbatim.
+  Paraphrase responsibilities, patterns, and data flow in your own words.
+  Signatures are fine; implementation bodies are not. Illustrative snippets
+  must stay under ~8 lines and be labeled as such.
+
+# Handling.
+rules:
+  - Treat the target as read-only. Clone git URLs shallow into .vamp-cache/.
+  - Never modify, move, or write inside a local target path.
+  - Output to vamped/<project-name>/ using the layouts in templates/.
+  - Ignore noise dirs (node_modules, .git, dist, build, .venv, __pycache__, etc.).
+  - Respect the target's LICENSE and record it in the output.
+  - Close every vamp with a confidence score, assumptions, and a self-critique.
+
+confidence:
+  required: true
+  format: "CONFIDENCE: [1-10] | REASONING: [why]"
+assumptions:
+  format: "ASSUMPTION: [statement] | RISK: [H/M/L] | IF WRONG: [impact]"

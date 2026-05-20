@@ -1,0 +1,10 @@
+# Shallow clones of vamp targets (transient)
+.vamp-cache/
+
+# Vamp outputs are per-use; keep your own if you want, ignored by default
+vamped/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
