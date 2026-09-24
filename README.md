@@ -13,7 +13,7 @@
 
 ### 🎯 Turn raw AI capability into reliable engineering output.
 
-`status` &nbsp;🟢 **Stable v1.1** &nbsp;&nbsp; `license` &nbsp;📄 **Apache 2.0** &nbsp;&nbsp; `scope` &nbsp;🌐 **Open Source** &nbsp;&nbsp; `author` &nbsp;👤 **0xPliny**
+`status` &nbsp;🟢 **Stable v1.1** &nbsp;&nbsp; `license` &nbsp;📄 **AGPL-3.0** &nbsp;&nbsp; `scope` &nbsp;🌐 **Open Source** &nbsp;&nbsp; `author` &nbsp;👤 **0xPliny**
 
 <p>
   <a href="https://github.com/0xPliny/forge-framework/stargazers"><img src="https://img.shields.io/github/stars/0xPliny/forge-framework?style=for-the-badge&logo=github&color=00d4ff&logoColor=white" alt="Stars"></a>
@@ -310,7 +310,7 @@ PRs welcome. Open an issue first for substantial changes.
 
 ## 📜 License
 
-[Apache 2.0](LICENSE) — Use it, extend it, build on it.
+[GNU AGPL v3.0](LICENSE) — Use it, extend it, build on it. Modified versions you distribute or run as a network service must be released under the same license.
 
 ---
 

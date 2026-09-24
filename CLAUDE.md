@@ -74,4 +74,4 @@ Open an issue for substantive changes before opening a PR. Good first contributi
 - Workflow templates in `templates/rise/`, `templates/care/`, `templates/harvest/`
 - Integrations under `integrations/` (JetBrains, Vim, etc.)
 
-Apache 2.0. Use it, extend it, build on it.
+GNU AGPL v3.0. Use it, extend it, build on it — modified versions distributed or offered as a network service must share their source under the same license.
