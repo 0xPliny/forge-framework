@@ -81,5 +81,5 @@
 
 - [Security Testing Module](../../modules/security_testing.yaml)
 - [Sentinel Persona](../../personas/sentinel.md)
-- [C-A-R-E Framework](../../frameworks/universal_care.md)
+- [C-A-R-E Framework](../../workflows/care.md)
 

@@ -148,14 +148,19 @@ anti_patterns:
 # ============================================
 # TOOLS & COMMANDS
 # ============================================
-tools:
+# Run by the AI during Verification Layers 1-2 (workflows/verification.md);
+# FORGE does not execute them. Use `verification_checks` with `procedure:`
+# instead of `command:` for domains without a CLI.
+verification_commands:
   standards_check:
+    layer: 1
     command: "[Command to run standards check]"
     expected_output: "[What success looks like]"
-    
-  quality_score:
-    command: "[Command to get quality score]"
-    expected_output: "[Score format]"
+
+  tests:
+    layer: 2
+    command: "[Command that runs the domain's tests]"
+    expected_output: "[What success looks like]"
 
 # ============================================
 # EXAMPLES

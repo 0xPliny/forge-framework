@@ -458,7 +458,7 @@ Analyze Root Cause
 2. Apply secondary domain standards where non-conflicting
 3. Document conflicts explicitly
 4. Allow user to resolve conflicts manually
-5. See multi_domain_orchestration.md for detailed conflict resolution
+5. See [orchestration.md](../core/orchestration.md) for detailed conflict resolution
 
 ---
 
@@ -663,12 +663,11 @@ ELSE:
 ## See Also
 
 - [Problem Classifier](problem_classifier.md) - Classification error handling
-- [Universal R-I-S-E](universal_rise.md) - R-I-S-E phase error handling
-- [Universal C-A-R-E](universal_care.md) - C-A-R-E iteration error handling
-- [Universal HARVEST](universal_harvest.md) - HARVEST quality error handling
-- [Verification Framework](verification_framework.md) - Verification failure recovery
-- [Multi-Domain Orchestration](../core/multi_domain_orchestration.md) - Conflict resolution
-- [Troubleshooting Guide](../docs/TROUBLESHOOTING.md) - Common error scenarios
+- [Universal R-I-S-E](rise.md) - R-I-S-E phase error handling
+- [Universal C-A-R-E](care.md) - C-A-R-E iteration error handling
+- [Universal HARVEST](harvest.md) - HARVEST quality error handling
+- [Verification Stack](verification.md) - Verification failure recovery
+- [Agent Orchestration](../core/orchestration.md) - Conflict resolution
 
 ---
 

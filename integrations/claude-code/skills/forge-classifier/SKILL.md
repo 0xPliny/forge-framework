@@ -38,6 +38,18 @@ Signal-word cheat sheet (from FORGE_MASTER.md §1):
 - *fix, debug, troubleshoot, resolve* → REPAIR
 - *optimize, improve, enhance, speed up* → OPTIMIZATION
 
+### Check past corrections (classification learning)
+
+Before settling, ask the learnings store whether this user has corrected similar classifications before:
+
+```bash
+python <FORGE_HOME>/tools/forge_learn.py hints --keywords <signal-words> --domain <domain>
+```
+
+- **Strong signal** (3+ matching corrections): use the suggested category, and say it comes from past corrections.
+- **Weak signal** (1-2): name it as a possibility and lower your confidence by 1-2 points if it disagrees with your pick.
+- **No matches** or no store: classify from the signal words alone.
+
 If classification confidence < 7, ask **one** clarifying question before recommending. Do not interrogate.
 
 ## Step 2: Map to workflow + persona
@@ -68,3 +80,14 @@ Then **stop**. Do not invoke the slash command yourself. Do not re-suggest if th
 - **Ambiguous category** (e.g., "improve this so it also handles X" — could be OPTIMIZATION or CREATION): name both possibilities, recommend the dominant one.
 - **Multiple categories in sequence** (e.g., "research best practices then build it"): suggest the first workflow only; user can re-route after.
 - **User pushes back on classification**: defer immediately, do not argue. Their judgment overrides.
+
+## Record corrections
+
+When the user corrects a classification ("this is TRANSFORMATION, not CREATION"), record it once so future classifications learn from it:
+
+```bash
+python <FORGE_HOME>/tools/forge_learn.py correct --from CREATION --to TRANSFORMATION \
+  --keywords refactor,existing,module --domain <domain> --reason "<the user's explanation>"
+```
+
+Use the signal words that misled you as `--keywords`. Do not record a correction the user didn't make.

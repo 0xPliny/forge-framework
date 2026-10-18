@@ -340,8 +340,8 @@ await agent.useTool('shell', {
 
 - [Browser Automation](./browser_automation.md) - Playwright patterns and best practices
 - [Session Manager](../execution/session_manager.md) - Persistent state management
-- [Parallel Agents](../execution/parallel_agents.md) - Multi-agent orchestration
+- [Agent Orchestration](../core/orchestration.md) - Multi-agent orchestration
 - [Error Handling](../execution/error_handling.md) - Retry logic and error categories
-- [R-I-S-E Framework](../frameworks/universal_rise.md) - Research → Identify → Synthesize → Execute
-- [C-A-R-E Framework](../frameworks/universal_care.md) - Context → Analyze → Respond → Evaluate
+- [R-I-S-E Framework](../workflows/rise.md) - Research → Identify → Synthesize → Execute
+- [C-A-R-E Framework](../workflows/care.md) - Context → Analyze → Respond → Evaluate
 

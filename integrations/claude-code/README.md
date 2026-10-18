@@ -102,7 +102,8 @@ The skill suggests once per task and never nags.
 - **No hook required.** The skill's `description` field triggers proactive invocation when the prompt matches engineering-task language. A `UserPromptSubmit` hook would be redundant.
 - **`$FORGE_HOME` placeholder over hardcoded paths.** Lets users install without forking the integration.
 - **Slash commands inline the workflow body via Read** rather than copying it. Keeps the commands small and stays in sync with the canonical workflow files.
-- **Phase 0 retrieval is wired but no-ops** until the persistent learnings store (Plan 1) is built. When that ships, every workflow invocation auto-loads relevant prior learnings.
+- **Phase 0 retrieval runs `tools/forge_learn.py search`** against `learnings/_index.jsonl`, so every workflow invocation loads relevant prior learnings once the store has entries.
+- **Telemetry is measured where it can be.** Commands call `tools/forge_session.py start` at Phase 0 and `emit` at close. Python 3.9+ must be on PATH; without it the AI falls back to self-reporting.
 
 ## Troubleshooting
 

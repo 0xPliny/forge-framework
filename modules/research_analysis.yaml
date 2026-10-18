@@ -340,16 +340,20 @@ anti_patterns:
 # ============================================
 # TOOLS & COMMANDS
 # ============================================
-# NOTE: CLI tools are not yet implemented. This is a future specification.
-# The framework is currently prompt-based. See docs/IMPLEMENTATION_STATUS.md
-# tools:
-#   data_validation:
-#     command: "Run data quality checks before analysis"
-#     expected_output: "Summary of missing values, outliers, data types"
-#     
-#   statistical_tests:
-#     command: "Match test to data characteristics"
-#     expected_output: "Appropriate test selected with assumptions checked"
+# Run by the AI during Verification Layers 1-2 (workflows/verification.md).
+# FORGE does not execute these itself. Adapt each command to the project's own
+# scripts and paths (check package.json / pyproject.toml first), and report
+# the actual output rather than the expected one.
+verification_checks:
+  # Procedures, not shell commands: research work has no universal CLI.
+  data_validation:
+    layer: 1
+    procedure: "Run data quality checks before analysis"
+    expected_output: "Summary of missing values, outliers, data types"
+  statistical_tests:
+    layer: 2
+    procedure: "Match the test to the data's characteristics and check its assumptions"
+    expected_output: "Appropriate test selected with assumptions checked"
 
 # ============================================
 # EXAMPLES

@@ -320,7 +320,7 @@ try {
 
 - [MCP Integration](./mcp_integration.md) - Model Context Protocol setup
 - [Session Manager](../execution/session_manager.md) - Persistent state management
-- [Parallel Agents](../execution/parallel_agents.md) - Multi-agent orchestration
-- [R-I-S-E Framework](../frameworks/universal_rise.md) - Research → Identify → Synthesize → Execute
-- [C-A-R-E Framework](../frameworks/universal_care.md) - Context → Analyze → Respond → Evaluate
+- [Agent Orchestration](../core/orchestration.md) - Multi-agent orchestration
+- [R-I-S-E Framework](../workflows/rise.md) - Research → Identify → Synthesize → Execute
+- [C-A-R-E Framework](../workflows/care.md) - Context → Analyze → Respond → Evaluate
 

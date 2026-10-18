@@ -1,8 +1,34 @@
 # Classification Learning System
 
-**Status:** Conceptual Design (Not Yet Implemented)
-**Version:** 1.0
-**Purpose:** Enable the FORGE to learn from user corrections to improve classification accuracy
+**Status:** Implemented in v1.2 (correction capture, hints, strong-signal promotion). Weighted scoring and adaptive thresholds remain design only; see [Implementation status](#implementation-status).
+**Version:** 1.2
+**Purpose:** Enable FORGE to learn from user corrections to improve classification accuracy
+
+---
+
+## How it works today
+
+Corrections live in the same learnings store as every other OMEGA insight
+(`learnings/_index.jsonl`), so there is one store, one schema and one
+retrieval path. A correction is a learning entry tagged
+`classification-correction`, `from:<ORIGINAL>` and `to:<CORRECTED>`.
+
+```bash
+# The user says: "This is TRANSFORMATION, not CREATION"
+python tools/forge_learn.py correct --from CREATION --to TRANSFORMATION \
+  --keywords refactor,existing,module --domain web_development \
+  --reason "Refactoring existing code, not building new"
+
+# Next time a task carries those signal words:
+python tools/forge_learn.py hints --keywords refactor,legacy --domain web_development
+# → Past corrections suggest TRANSFORMATION (1 correction(s), weak signal).
+```
+
+`hints` counts corrections whose keywords overlap the task's keywords, in the
+same domain or `general`. Three or more agreeing corrections make a **strong
+signal** (the promotion rule below); the `forge-classifier` skill then uses
+the suggested category and says that it came from past corrections. Fewer
+than three is a weak signal: the skill names it and lowers its confidence.
 
 ---
 
@@ -334,26 +360,20 @@ signal_weights:
 
 ---
 
-## Future Implementation
+## Implementation status
 
-When implemented, this system will:
+| Capability | Status |
+|---|---|
+| Persist corrections | Done: `forge_learn.py correct` → `learnings/_index.jsonl` (no separate `~/.forge/` files) |
+| Load learnings at classification time | Done: `forge_learn.py hints`, called by the `forge-classifier` skill |
+| Strong-signal promotion (3+ corrections) | Done: `hints` reports `strong` at 3+ agreeing corrections |
+| Export/import | Done by construction: the store is one JSONL file |
+| Weighted signal adjustments (`learned_weights.yaml`) | Not implemented: classification is prompt-based, so there are no numeric scores to adjust |
+| Adaptive confidence thresholds | Not implemented: needs classification counts, which telemetry does not yet record per correction |
+| Pruning | Not implemented: the store is append-only; supersede an entry by writing a new one |
 
-1. **Persist corrections** to `~/.forge/classification_learnings.yaml`
-2. **Load learnings** at framework activation
-3. **Apply learned weights** to classification confidence scores
-4. **Adjust thresholds** based on user correction rates
-5. **Periodically prune** low-value learnings (weights near zero)
-6. **Export/import** learnings for sharing between sessions
-
-### Implementation Checklist
-
-- [ ] Create storage directory structure
-- [ ] Implement correction logging
-- [ ] Implement weight adjustment algorithm
-- [ ] Integrate with Problem Classifier
-- [ ] Add learning export/import commands
-- [ ] Add pruning mechanism
-- [ ] Add analytics dashboard
+The storage format and weight algorithm sections above are the original
+design and describe the not-implemented rows.
 
 ---
 
@@ -366,5 +386,5 @@ When implemented, this system will:
 
 ---
 
-*This document describes a conceptual design. Implementation is planned for a future release.*
+*Correction capture and hints are implemented in `tools/forge_learn.py`; weighted scoring and adaptive thresholds remain design.*
 

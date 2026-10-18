@@ -331,6 +331,6 @@ async function updateMetricsWithLock(sessionId, agentName, metrics) {
 
 - [Session Manager](./session_manager.md) - Persistent state management
 - [Checkpoint Manager](./checkpoint_manager.md) - Git-based checkpointing
-- [Parallel Agents](./parallel_agents.md) - Multi-agent orchestration
+- [Agent Orchestration](../core/orchestration.md) - Multi-agent orchestration
 - [Error Handling](./error_handling.md) - Retry logic and error categories
 

@@ -57,12 +57,13 @@ If you reproduce these figures in your environment, your own data is more credib
 
 ## What we don't yet measure (gaps)
 
-The current telemetry schema captures workflow-level metrics. It does **not** yet capture:
+Schema v1.1 closed two gaps. `tools/forge_session.py` now **measures** wall time and the lines-of-code delta (git working tree since the session started). Sessions record which fields were measured in `measured`, and `forge_report.py` aggregates only those.
 
-- Wall time (requires the AI to record start/stop reliably; Plan: add to schema v1.1)
+Still **not** captured:
+
 - Token cost (Claude Code may not always expose this from inside a slash command)
-- Lines-of-code delta (would require a git-aware emitter)
 - Quality signals downstream of merge (bug rate, rework)
+- Time spent outside a session (review, rework in later sessions)
 
 These gaps matter. Until they're closed, the multipliers in the README cannot be fully reproduced from `sessions.jsonl` alone — you'll need to combine telemetry with manual measurement of the missing fields.
 
@@ -70,9 +71,9 @@ These gaps matter. Until they're closed, the multipliers in the README cannot be
 
 | Claim | Status |
 |---|---|
-| 21x developer efficiency | Reported by author. Reproducible via baseline → 30-day comparison once wall-time is in schema v1.1. |
+| 21x developer efficiency | Reported by author. Now reproducible in principle: compare measured wall time and churn for a 30-day baseline against 30 days of `/rise` / `/care` sessions. |
 | $0.002 vs $0.014 / line | Reported by author. Requires token-cost capture (planned). |
-| 56x documentation speed | Reported by author. Reproducible for `/harvest` workflows once wall-time is captured. |
+| 56x documentation speed | Reported by author. Measurable for `/harvest` sessions now that wall time is captured. |
 | 240x standards-checking | Reported by author. Domain-module-specific; methodology TBD. |
 
 ---

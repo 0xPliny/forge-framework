@@ -25,8 +25,11 @@ jobs:
 
       - name: Python syntax check (tools)
         run: |
-          python -m py_compile tools/forge_eval.py tools/forge_report.py
+          python -m py_compile tools/*.py tests/*.py
           echo "Python syntax OK"
+
+      - name: Tool tests and Markdown link check
+        run: python -m unittest discover -v tests
 
       - name: Smoke test forge_report.py
         run: |
@@ -78,3 +81,13 @@ jobs:
 
       - name: Done
         run: echo "All CI checks passed"
+
+  tools-min-python:
+    # The tools promise Python 3.9+ and stdlib only: prove it without pip.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+      - run: python -m unittest discover tests

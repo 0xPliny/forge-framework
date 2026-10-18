@@ -194,9 +194,8 @@ const phases = [
 
 ## Related Documentation
 
-- [Parallel Agents](../execution/parallel_agents.md) - Multi-agent orchestration patterns
 - [Session Manager](../execution/session_manager.md) - Persistent state management
 - [Checkpoint Manager](../execution/checkpoint_manager.md) - Git-based checkpointing
-- [R-I-S-E Framework](../frameworks/universal_rise.md) - Research → Identify → Synthesize → Execute
-- [C-A-R-E Framework](../frameworks/universal_care.md) - Context → Analyze → Respond → Evaluate
+- [R-I-S-E Framework](../workflows/rise.md) - Research → Identify → Synthesize → Execute
+- [C-A-R-E Framework](../workflows/care.md) - Context → Analyze → Respond → Evaluate
 

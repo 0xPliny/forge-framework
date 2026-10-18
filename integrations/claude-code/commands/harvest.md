@@ -12,7 +12,15 @@ You are operating under the FORGE framework's **HARVEST workflow** for UNDERSTAN
 
 ## Phase 0 — Prior learnings retrieval
 
-If `<FORGE_HOME>/learnings/_index.jsonl` exists, search for prior HARVEST entries on similar domains/codebases. Surface top 3 before Phase 1. Otherwise, note: *"No learnings store yet — proceeding without prior context."*
+Start the session clock: `python <FORGE_HOME>/tools/forge_session.py start`. It records the start time and git baseline so telemetry is measured, not estimated.
+
+Then retrieve prior learnings per `<FORGE_HOME>/core/omega_retrieval.md`:
+
+```bash
+python <FORGE_HOME>/tools/forge_learn.py search --category <CATEGORY> --domain <domain> --keywords <k1,k2,k3>
+```
+
+It prints the top 3 matches (score ≥ 3), *"No matching prior learnings."*, or *"No learnings store yet — proceeding without prior context."* Surface the matches before Phase 1 and verify them before relying on them. Prefer entries from similar domains and codebases.
 
 ## Engine (optional) — the `harvest` tool
 
@@ -37,7 +45,7 @@ Apply HARVEST. Hard rules from the workflow file:
 
 After delivery:
 
-**1. Telemetry (active now)** — Append one JSON line to `<FORGE_HOME>/telemetry/sessions.jsonl` matching the schema at `<FORGE_HOME>/telemetry/schema.json`. Self-report honestly:
+**1. Telemetry** — Build one JSON object matching `<FORGE_HOME>/telemetry/schema.json` and pipe it to `python <FORGE_HOME>/tools/forge_session.py emit`. It fills `started_at`, `timestamp`, `wall_time_sec` and `git_stats` by measurement, validates the record, and appends it to `<FORGE_HOME>/telemetry/sessions.jsonl`. (If no session was started or Python is unavailable, append the line yourself and self-report those fields.) Self-report the rest honestly:
 - `task_id` (UUID4 you generate), `timestamp` (ISO 8601 UTC), `workflow: "harvest"`
 - `classification`: category (UNDERSTANDING), complexity, domain, confidence
 - `gates_passed` / `gates_failed` against the gate names in `schema.json`
@@ -48,7 +56,7 @@ After delivery:
 
 Skip emission entirely if `FORGE_TELEMETRY_DISABLED=1`. Honesty matters — `tools/forge_eval.py` audits self-reports.
 
-**2. Learnings (future, when Plan 1 ships)** — Append a learning entry capturing which extraction sources were richest and which patterns generalized. Skip if the store doesn't exist yet.
+**2. Learnings** — Capture which extraction sources were richest and which patterns generalized. Skip if nothing non-obvious surfaced. Write the entry fields per `<FORGE_HOME>/core/omega_retrieval.md` (Step 2) to a JSON file and append it with `python <FORGE_HOME>/tools/forge_learn.py add --file entry.json`; it fills the id, date and normalized signature and validates the entry. To start from this session's telemetry: `python <FORGE_HOME>/tools/forge_learn.py promote --task-id last > draft.json`.
 
 ---
 

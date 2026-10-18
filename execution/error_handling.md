@@ -353,5 +353,5 @@ async function handleUnrecoverableError(error, sessionId, agentName) {
 - [Session Manager](./session_manager.md) - Persistent state management
 - [Checkpoint Manager](./checkpoint_manager.md) - Git-based checkpointing
 - [Audit System](./audit_system.md) - Crash-safe logging
-- [Parallel Agents](./parallel_agents.md) - Multi-agent orchestration
+- [Agent Orchestration](../core/orchestration.md) - Multi-agent orchestration
 

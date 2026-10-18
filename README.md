@@ -13,7 +13,7 @@
 
 ### 🎯 Turn raw AI capability into reliable engineering output.
 
-`status` &nbsp;🟢 **Stable v1.1** &nbsp;&nbsp; `license` &nbsp;📄 **AGPL-3.0** &nbsp;&nbsp; `scope` &nbsp;🌐 **Open Source** &nbsp;&nbsp; `author` &nbsp;👤 **0xPliny**
+`status` &nbsp;🟢 **Stable v1.2** &nbsp;&nbsp; `license` &nbsp;📄 **AGPL-3.0** &nbsp;&nbsp; `scope` &nbsp;🌐 **Open Source** &nbsp;&nbsp; `author` &nbsp;👤 **0xPliny**
 
 <p>
   <a href="https://github.com/0xPliny/forge-framework/stargazers"><img src="https://img.shields.io/github/stars/0xPliny/forge-framework?style=for-the-badge&logo=github&color=00d4ff&logoColor=white" alt="Stars"></a>
@@ -243,7 +243,7 @@ The framework's central claim — that error rate converges over iterations — 
 |---|---|---|
 | 📊 **Telemetry** | Every workflow invocation: classification, gates, assumptions, iterations, outcome | [`telemetry/`](telemetry/) |
 | 🧠 **Learnings** | Curated insights — only when something non-obvious surfaced. Queried at Phase 0. | [`learnings/`](learnings/) |
-| 🛠️ **Tools** | `forge_eval.py` (single-session scorer) · `forge_report.py` (N-day aggregator) | [`tools/`](tools/) |
+| 🛠️ **Tools** | `forge_learn.py` (learnings store: search, add, promote, classification corrections) · `forge_session.py` (measured wall time + git churn) · `forge_eval.py` (single-session scorer) · `forge_report.py` (N-day aggregator) | [`tools/`](tools/) |
 
 The retrieval and write contract lives in [`core/omega_retrieval.md`](core/omega_retrieval.md). Both stores stay local by default — your learnings reflect your work and aren't designed to ship.
 
@@ -318,7 +318,7 @@ PRs welcome. Open an issue first for substantial changes.
 
 FORGE was developed by **[0xPliny](https://github.com/0xPliny)** through hands-on experience deploying AI-driven engineering workflows across industrial automation and enterprise software. It distills domain-agnostic patterns for making AI a reliable engineering partner — not just a code generator.
 
-🌐 [GitHub →](https://github.com/0xPliny) &nbsp;·&nbsp; 🏷️ Framework v1.1
+🌐 [GitHub →](https://github.com/0xPliny) &nbsp;·&nbsp; 🏷️ Framework v1.2
 
 <div align="center">
 

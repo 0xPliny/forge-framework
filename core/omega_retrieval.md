@@ -33,7 +33,7 @@ score(entry) =
   + count(entry.problem_signature.keywords ∩ task.keywords)
 ```
 
-Use any tool (Bash + Python, Read + manual scan, or PowerShell). The exact mechanism doesn't matter — what matters is the ranking.
+The reference implementation is `python tools/forge_learn.py search --category <C> --domain <d> --keywords <k1,k2,k3>`, which applies this score, the cutoff and the ordering below. Without Python, any tool works (Read + manual scan, PowerShell). What matters is the ranking.
 
 ### Step 3: Surface top 3 (with cutoff)
 
@@ -101,7 +101,7 @@ Per `learnings/schema.json`. Required fields:
 
 ### Step 3: Append
 
-Write exactly one JSON line (no trailing newline issues, no pretty-printing) to `learnings/_index.jsonl`. Use whatever shell tool fits your environment (Bash `>>`, PowerShell `Add-Content`, Python `open(..., 'a')`).
+Prefer `python tools/forge_learn.py add --file entry.json`. It fills `learning_id`, `date` and `problem_signature.normalized`, validates against the schema, and appends exactly one line. Without Python, write exactly one JSON line (no pretty-printing) to `learnings/_index.jsonl` with whatever shell tool fits (Bash `>>`, PowerShell `Add-Content`).
 
 ### Step 4: Optional — write a deep dive
 
@@ -124,10 +124,14 @@ These erode the store. Avoid:
 
 ---
 
+## Implemented
+
+- **Promote from telemetry** — `tools/forge_learn.py promote --task-id <id>` drafts an entry from a flagged session (v1.2)
+- **Classification learning** — `forge_learn.py correct` / `hints` (v1.2; see `workflows/classification_learning.md`)
+
 ## Future enhancements (v2+)
 
 - **Embedding-based retrieval** when entry count exceeds ~100 — string matching becomes brittle at scale
-- **`tools/forge_promote.py`** — interactively convert a flagged telemetry session into a learning entry
 - **Cross-store search** — surface learnings from other operators if/when a shared community store emerges (requires schema interop work)
 - **Learning decay** — weight recent learnings higher; archive entries that haven't matched any task in N months
 

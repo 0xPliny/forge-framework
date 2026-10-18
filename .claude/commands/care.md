@@ -12,7 +12,15 @@ You are operating under the FORGE framework's **C-A-R-E workflow** for REPAIR or
 
 ## Phase 0 — Prior learnings retrieval
 
-If `learnings/_index.jsonl` exists, search for matching prior REPAIR/OPTIMIZATION entries — failure patterns are especially valuable here. Surface top 3 before Phase 1 per `core/omega_retrieval.md`. Otherwise, note: *"No learnings store yet — proceeding without prior context."*
+Start the session clock: `python tools/forge_session.py start`. It records the start time and git baseline so telemetry is measured, not estimated.
+
+Then retrieve prior learnings per `core/omega_retrieval.md`:
+
+```bash
+python tools/forge_learn.py search --category <CATEGORY> --domain <domain> --keywords <k1,k2,k3>
+```
+
+It prints the top 3 matches (score ≥ 3), *"No matching prior learnings."*, or *"No learnings store yet — proceeding without prior context."* Surface the matches before Phase 1 and verify them before relying on them. Failure patterns from prior REPAIR/OPTIMIZATION work are especially valuable here.
 
 ## Phases 1-4 (iterative loop)
 
@@ -26,7 +34,7 @@ Apply C-A-R-E. Honor:
 
 After resolution:
 
-**1. Telemetry** — Append one JSON line to `telemetry/sessions.jsonl` per `telemetry/schema.json`. Self-report honestly:
+**1. Telemetry** — Build one JSON object matching `telemetry/schema.json` and pipe it to `python tools/forge_session.py emit`. It fills `started_at`, `timestamp`, `wall_time_sec` and `git_stats` by measurement, validates the record, and appends it to `telemetry/sessions.jsonl`. (If no session was started or Python is unavailable, append the line yourself and self-report those fields.) Self-report the rest honestly:
 - `task_id` (UUID4), `timestamp` (ISO 8601 UTC), `workflow: "care"`
 - `classification`: category (REPAIR or OPTIMIZATION), complexity, domain, confidence
 - `gates_passed` / `gates_failed` against the gate names in `schema.json`
@@ -37,7 +45,7 @@ After resolution:
 
 Skip emission entirely if `FORGE_TELEMETRY_DISABLED=1`.
 
-**2. Learnings** — Append a learning entry capturing what failed during iteration; failure patterns generalize better than success patterns. Skip if nothing non-obvious surfaced.
+**2. Learnings** — Capture what failed during iteration; failure patterns generalize better than success patterns. Skip if nothing non-obvious surfaced. Write the entry fields per `core/omega_retrieval.md` (Step 2) to a JSON file and append it with `python tools/forge_learn.py add --file entry.json`; it fills the id, date and normalized signature and validates the entry. To start from this session's telemetry: `python tools/forge_learn.py promote --task-id last > draft.json`.
 
 ---
 

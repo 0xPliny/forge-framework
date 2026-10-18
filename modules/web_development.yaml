@@ -357,24 +357,27 @@ anti_patterns:
 # ============================================
 # TOOLS & COMMANDS
 # ============================================
-# NOTE: CLI tools are not yet implemented. This is a future specification.
-# The framework is currently prompt-based. See docs/IMPLEMENTATION_STATUS.md
-# tools:
-#   lint:
-#     command: "npm run lint"
-#     expected_output: "No ESLint errors or warnings"
-#     
-#   type_check:
-#     command: "npx tsc --noEmit"
-#     expected_output: "No TypeScript errors"
-#     
-#   test:
-#     command: "npm test"
-#     expected_output: "All tests passing"
-#     
-#   build:
-#     command: "npm run build"
-#     expected_output: "Successful build with no errors"
+# Run by the AI during Verification Layers 1-2 (workflows/verification.md).
+# FORGE does not execute these itself. Adapt each command to the project's own
+# scripts and paths (check package.json / pyproject.toml first), and report
+# the actual output rather than the expected one.
+verification_commands:
+  lint:
+    layer: 1
+    command: "npm run lint"
+    expected_output: "No ESLint errors or warnings"
+  type_check:
+    layer: 1
+    command: "npx tsc --noEmit"
+    expected_output: "No TypeScript errors"
+  test:
+    layer: 2
+    command: "npm test"
+    expected_output: "All tests passing"
+  build:
+    layer: 2
+    command: "npm run build"
+    expected_output: "Successful build with no errors"
 
 # ============================================
 # EXAMPLES

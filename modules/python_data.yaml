@@ -435,24 +435,27 @@ anti_patterns:
 # ============================================
 # TOOLS & COMMANDS
 # ============================================
-# NOTE: CLI tools are not yet implemented. This is a future specification.
-# The framework is currently prompt-based. See docs/IMPLEMENTATION_STATUS.md
-# tools:
-#   type_check:
-#     command: "mypy --strict src/"
-#     expected_output: "No type errors"
-#     
-#   lint:
-#     command: "ruff check src/ && black --check src/"
-#     expected_output: "No linting errors, code is formatted"
-#     
-#   test:
-#     command: "pytest --cov=src tests/"
-#     expected_output: "All tests pass, coverage >80%"
-#     
-#   notebook_check:
-#     command: "nbqa mypy notebooks/ && nbqa ruff notebooks/"
-#     expected_output: "Notebooks pass type and lint checks"
+# Run by the AI during Verification Layers 1-2 (workflows/verification.md).
+# FORGE does not execute these itself. Adapt each command to the project's own
+# scripts and paths (check package.json / pyproject.toml first), and report
+# the actual output rather than the expected one.
+verification_commands:
+  type_check:
+    layer: 1
+    command: "mypy --strict src/"
+    expected_output: "No type errors"
+  lint:
+    layer: 1
+    command: "ruff check src/ && black --check src/"
+    expected_output: "No linting errors, code is formatted"
+  test:
+    layer: 2
+    command: "pytest --cov=src tests/"
+    expected_output: "All tests pass, coverage >80%"
+  notebook_check:
+    layer: 1
+    command: "nbqa mypy notebooks/ && nbqa ruff notebooks/"
+    expected_output: "Notebooks pass type and lint checks"
 
 # ============================================
 # EXAMPLES

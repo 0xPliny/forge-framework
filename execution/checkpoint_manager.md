@@ -306,6 +306,6 @@ if (checkpointResult.success) {
 
 - [Session Manager](./session_manager.md) - Persistent state management
 - [Audit System](./audit_system.md) - Crash-safe logging
-- [Parallel Agents](./parallel_agents.md) - Multi-agent orchestration
+- [Agent Orchestration](../core/orchestration.md) - Multi-agent orchestration
 - [Error Handling](./error_handling.md) - Retry logic and error categories
 
