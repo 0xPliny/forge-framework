@@ -14,6 +14,17 @@ You are operating under the FORGE framework's **HARVEST workflow** for UNDERSTAN
 
 If `<FORGE_HOME>/learnings/_index.jsonl` exists, search for prior HARVEST entries on similar domains/codebases. Surface top 3 before Phase 1. Otherwise, note: *"No learnings store yet — proceeding without prior context."*
 
+## Engine (optional) — the `harvest` tool
+
+If `harvest --help` succeeds, run the phases with the [HARVEST engine](https://github.com/0xPliny/harvest) instead of reading sources by hand. Run `harvest phases` for the full map. The essentials:
+
+- **Extract:** `harvest extract <target> --graph -o harvested/<name>`. For Electron/ASAR apps, .NET assemblies and SQLite files it also runs REA (Reverse Engineer Anything) when `rea` is installed (`--rea` forces it). Read `MANIFEST.json` warnings and `REA.md` before Phase 2.
+- **Analyze:** `harvest inspect` / `harvest search`; `harvest reverse <target>` for the methodology. If REA's MCP server (`rea`) is connected, trace compiled code with its tools (`trace_application_feature`, `xrefs`, `batch_decompile`).
+- **Verify:** `harvest evidence init review.json` then `harvest evidence import review.json harvested/<name>/REA.md`. Carry REA's stated `confidence` and `limitations` into the Confidence Protocol.
+- **Transform:** `harvest export harvested/<name> -o overview.html`. Review `SENSITIVE.md` before sharing anything.
+
+Cite blueprint `file:line` locations and REA Evidence files (`rea/*.json`) as sources. If `harvest` is not installed, continue manually. Do not install it without asking the user.
+
 ## Phases 1-7
 
 Apply HARVEST. Hard rules from the workflow file:
