@@ -365,9 +365,9 @@ async function markAgentCompleted(sessionId, agentName, checkpointCommit) {
 
 - [Checkpoint Manager](./checkpoint_manager.md) - Git-based checkpointing
 - [Audit System](./audit_system.md) - Crash-safe logging
-- [Parallel Agents](./parallel_agents.md) - Multi-agent orchestration
+- [Agent Orchestration](../core/orchestration.md) - Multi-agent orchestration
 - [Error Handling](./error_handling.md) - Retry logic and error categories
-- [R-I-S-E Framework](../frameworks/universal_rise.md) - Research → Identify → Synthesize → Execute
-- [C-A-R-E Framework](../frameworks/universal_care.md) - Context → Analyze → Respond → Evaluate
-- [OMEGA Loop](../frameworks/omega_loop.md) - Self-improvement system
+- [R-I-S-E Framework](../workflows/rise.md) - Research → Identify → Synthesize → Execute
+- [C-A-R-E Framework](../workflows/care.md) - Context → Analyze → Respond → Evaluate
+- [OMEGA Loop](../workflows/omega_loop.md) - Self-improvement system
 

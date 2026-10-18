@@ -371,5 +371,5 @@ rise_failure_learning:
 ### See Also
 
 - [Error Handling Protocol](error_handling_protocol.md) - Comprehensive error handling framework
-- [Meta-Framework](meta_framework.md) - Escalation to Layer 2 or Layer 3
-- [Troubleshooting Guide](../docs/TROUBLESHOOTING.md) - Common R-I-S-E issues
+- [Escalation Decision Tree](escalation_decision_tree.md) - When and where to escalate
+- [Error Handling Protocol](error_handling_protocol.md) - Common failure scenarios and recovery

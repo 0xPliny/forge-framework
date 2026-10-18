@@ -396,5 +396,5 @@ care_failure_learning:
 
 - [Error Handling Protocol](error_handling_protocol.md) - Comprehensive error handling
 - [Problem Classifier](problem_classifier.md) - Re-classification procedures
-- [Meta-Framework](meta_framework.md) - Escalation paths
-- [Troubleshooting Guide](../docs/TROUBLESHOOTING.md) - Common C-A-R-E issues
+- [Escalation Decision Tree](escalation_decision_tree.md) - Escalation paths
+- [Error Handling Protocol](error_handling_protocol.md) - Common failure scenarios and recovery

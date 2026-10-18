@@ -15,7 +15,7 @@ import sys
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from statistics import mean
+from statistics import mean, median
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 from forge_eval import score_session  # noqa: E402
@@ -70,6 +70,16 @@ def render_md(sessions: list, days: int) -> str:
     total = len(sessions)
     success_rate = 100.0 * outcomes.get("success", 0) / total
 
+    # v1.1: only mechanically measured values are aggregated as facts.
+    measured_wall = [
+        s["wall_time_sec"] for s in sessions
+        if "wall_time_sec" in (s.get("measured") or []) and s.get("wall_time_sec") is not None
+    ]
+    measured_git = [
+        s["git_stats"] for s in sessions
+        if "git_stats" in (s.get("measured") or []) and s.get("git_stats")
+    ]
+
     lines = [
         f"# FORGE Report — Last {days} Days",
         "",
@@ -77,6 +87,20 @@ def render_md(sessions: list, days: int) -> str:
         f"- **Success rate:** {success_rate:.0f}%",
         f"- **Avg classification confidence:** {mean(confidences):.1f}/10",
         f"- **Avg gate score:** {mean(scores):.1f}/100",
+        f"- **Measured sessions (v1.1):** {len(measured_wall)} of {total}",
+    ]
+    if measured_wall:
+        lines.append(
+            f"- **Wall time (measured):** median {median(measured_wall) / 60:.1f} min, "
+            f"total {sum(measured_wall) / 3600:.1f} h"
+        )
+    if measured_git:
+        lines.append(
+            f"- **Code churn (measured):** +{sum(g['lines_added'] for g in measured_git)} / "
+            f"-{sum(g['lines_removed'] for g in measured_git)} lines across "
+            f"{sum(g['files_changed'] for g in measured_git)} file changes"
+        )
+    lines += [
         "",
         "## Workflow Distribution",
         "",
@@ -132,6 +156,14 @@ def render_md(sessions: list, days: int) -> str:
             lines.append(
                 f"| `{s['task_id'][:8]}` | `/{s['workflow']}` | {s['outcome']} | {note} |"
             )
+
+    if iterations or failed:
+        lines += [
+            "",
+            "Turn a candidate into a learning: "
+            "`python tools/forge_learn.py promote --task-id <id> > draft.json`, edit it, then "
+            "`python tools/forge_learn.py add --file draft.json`.",
+        ]
 
     return "\n".join(lines) + "\n"
 

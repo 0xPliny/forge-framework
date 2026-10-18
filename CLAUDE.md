@@ -46,7 +46,8 @@ When making changes, follow FORGE's own protocols on FORGE itself — eat your o
 | [`core/`](core/) | Confidence protocol, assumption tracker, meta-prompting, OMEGA retrieval |
 | [`telemetry/`](telemetry/) | OMEGA mechanical log (schema + privacy + methodology) |
 | [`learnings/`](learnings/) | OMEGA curated insights store |
-| [`tools/`](tools/) | `forge_eval.py` (per-session scorer) and `forge_report.py` (N-day aggregator) |
+| [`tools/`](tools/) | `forge_learn.py` (learnings store), `forge_session.py` (measured telemetry), `forge_schema.py` (stdlib validator), `forge_eval.py` (per-session scorer), `forge_report.py` (N-day aggregator) |
+| [`tests/`](tests/) | `unittest` suite for the tools: `python -m unittest discover tests` |
 | [`integrations/claude-code/`](integrations/claude-code/) | User-level install for Claude Code |
 
 ## Operational stack tools
@@ -57,6 +58,16 @@ python tools/forge_eval.py --last
 
 # Aggregate the last 30 days of telemetry into a Markdown report
 python tools/forge_report.py --days 30
+
+# Phase 0 retrieval from the learnings store
+python tools/forge_learn.py search --category CREATION --domain ai_tooling --keywords telemetry,hooks
+
+# Measure a session (start at Phase 0, pipe the telemetry record to emit at close)
+python tools/forge_session.py start
+python tools/forge_session.py emit --file record.json
+
+# Run the tool tests
+python -m unittest discover tests
 ```
 
 Requires Python 3.9+. Stdlib only — no `pip install`.

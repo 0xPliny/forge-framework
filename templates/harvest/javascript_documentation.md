@@ -413,9 +413,8 @@ forge omega learn
 
 ## Related Documentation
 
-- [HARVEST Framework](../../frameworks/universal_harvest.md) - Documentation methodology
-- [Pattern Library](../../docs/PATTERN_LIBRARY.md) - Comprehensive pattern catalog
-- [JavaScript Patterns](../../docs/DOCUMENTATION_PATTERNS.md) - JavaScript-specific patterns
+- [HARVEST Framework](../../workflows/harvest.md) - Documentation methodology
+- [Templates index](../README.md) - All documentation templates
 
 ---
 

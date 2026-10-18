@@ -221,11 +221,11 @@ Result: New framework created, problem solved with SAFE + R-I-S-E
 ## Related Documents
 
 - [FORGE_MASTER.md](../FORGE_MASTER.md) — Master prompt with framework definitions
-- [meta_framework.md](meta_framework.md) — 3-layer architecture details
+- [FORGE_MASTER.md](../FORGE_MASTER.md) — workflows, classification and operating principles
 - [omega_loop.md](omega_loop.md) — Self-improvement loop
 - [problem_classifier.md](problem_classifier.md) — Problem classification logic
-- [universal_rise.md](universal_rise.md) — R-I-S-E framework details
-- [universal_care.md](universal_care.md) — C-A-R-E framework details
+- [rise.md](rise.md) — R-I-S-E framework details
+- [care.md](care.md) — C-A-R-E framework details
 
 ---
 

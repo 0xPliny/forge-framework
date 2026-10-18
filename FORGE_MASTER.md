@@ -44,71 +44,66 @@ CLASSIFICATION:
 
 ---
 
-## 2. R-I-S-E Workflow (Research → Implement → Synthesize → Execute)
+## 2. R-I-S-E Workflow (Research → Identify → Synthesize → Execute)
 
 **Use for:** CREATION and TRANSFORMATION problems.
 
 ### Phase 1: Research
-- Understand the full problem scope
-- Identify constraints, requirements, and edge cases
-- Review existing patterns and prior art
+- Build complete understanding of the problem space
+- Gather available information; flag what is missing
+- Identify constraints, explicit and implicit requirements, and edge cases
 - Document assumptions with risk levels
-- **Gate:** Research brief reviewed before proceeding
+- **Gate:** Success criteria, requirements and constraints are understood; uncertainty is flagged
 
-### Phase 2: Implement
-- Build the solution following domain standards
-- Apply loaded domain module rules
-- Write code/artifacts incrementally with verification
-- Track confidence on each component
-- **Gate:** All components pass Layer 1-2 verification
+### Phase 2: Identify
+- Extract and prioritize key requirements
+- Recognize patterns and similar problems (prior art, prior learnings)
+- Catalogue risks
+- Map the solution space
+- **Gate:** At least 2 viable approaches identified; high-risk assumptions validated
 
 ### Phase 3: Synthesize
-- Integrate all components
-- Run comprehensive testing
-- Refine based on test results
-- Ensure cross-component consistency
-- **Gate:** Full solution passes Layer 1-3 verification
+- Generate solution options and evaluate them against requirements (Tree of Thoughts for complex problems)
+- Select the optimal approach with rationale
+- Create the implementation plan and define success criteria
+- **Gate:** Approach selected with rationale; plan and success criteria written
 
 ### Phase 4: Execute
-- Finalize documentation
-- Prepare deployment artifacts
-- Hand off with clear instructions
-- Capture learnings for OMEGA Loop
-- **Gate:** Stakeholder acceptance
+- Implement per plan, applying loaded domain module rules
+- Verify incrementally with the layers required by complexity
+- Handle failures per the error-handling protocol
+- Document the solution and capture learnings for the OMEGA Loop
+- **Gate:** Output meets requirements and passes required verification layers
 
 ---
 
-## 3. C-A-R-E Workflow (Collect → Analyze → Refine → Execute)
+## 3. C-A-R-E Workflow (Context → Analyze → Respond → Evaluate)
 
-**Use for:** REPAIR and OPTIMIZATION problems.
+**Use for:** REPAIR and OPTIMIZATION problems. Iterative: loop until quality gates pass (default cap 3, max 5).
 
-### Phase 1: Collect
-- Gather all relevant context
-- Reproduce the issue (for REPAIR)
-- Establish baseline metrics (for OPTIMIZATION)
-- Document environment and constraints
-- **Gate:** Problem is reproducible / measurable
+### Phase 1: Context
+- Load the current state rapidly: code, logs, environment
+- Reproduce the issue (for REPAIR) or establish baseline metrics (for OPTIMIZATION)
+- Make the goal specific; identify constraints
+- **Gate:** Problem is reproducible / measurable; goal is specific
 
 ### Phase 2: Analyze
-- Perform root cause analysis
-- Identify contributing factors
+- Perform root cause analysis; rank hypotheses by likelihood
+- Decompose the fix into sub-tasks and plan their order
 - Map the impact scope
-- Generate hypotheses ranked by likelihood
 - **Gate:** Root cause identified with confidence ≥ 7
 
-### Phase 3: Refine
-- Develop the fix or improvement
-- Test against the original issue
-- Verify no regressions introduced
-- Measure improvement against baseline
-- **Gate:** Fix verified, no regressions
+### Phase 3: Respond
+- Implement the fix or improvement, sub-task by sub-task
+- Apply domain standards; handle blockers explicitly
+- **Gate:** Every sub-task complete
 
-### Phase 4: Execute
-- Apply the solution
-- Monitor for stability
-- Document the resolution
-- Update knowledge base via OMEGA Loop
-- **Gate:** Issue confirmed resolved in production
+### Phase 4: Evaluate
+- Apply quality gates; test against the original issue
+- Verify no regressions; measure improvement against the baseline
+- Decide: complete, iterate (back to Analyze), or escalate to R-I-S-E
+- Capture what failed during iteration for the OMEGA Loop
+- **Gate:** Fix verified, no regressions; or an explicit iterate/escalate decision
 
 ---
 
@@ -312,5 +307,5 @@ Each persona inherits all FORGE protocols (Confidence, Assumptions, Meta-Prompti
 
 ---
 
-*FORGE v1.1 — Framework for Orchestrated, Repeatable, Governed Engineering*
+*FORGE v1.2 — Framework for Orchestrated, Repeatable, Governed Engineering*
 *Created by Chase Logan*

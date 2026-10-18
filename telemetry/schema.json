@@ -21,7 +21,8 @@
   "properties": {
     "schema_version": {
       "type": "string",
-      "const": "1.0"
+      "enum": ["1.0", "1.1"],
+      "description": "1.1 adds started_at, git_stats and measured (all optional). 1.0 lines remain valid."
     },
     "task_id": {
       "type": "string",
@@ -31,6 +32,11 @@
       "type": "string",
       "format": "date-time",
       "description": "ISO 8601 UTC timestamp at task close."
+    },
+    "started_at": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "v1.1. ISO 8601 UTC time the workflow started (recorded by tools/forge_session.py start)."
     },
     "classification": {
       "type": "object",
@@ -100,7 +106,8 @@
     },
     "wall_time_sec": {
       "type": ["number", "null"],
-      "minimum": 0
+      "minimum": 0,
+      "description": "Seconds from start to task close. Measured when listed in `measured`; otherwise self-reported."
     },
     "tokens_in": {
       "type": ["integer", "null"],
@@ -109,6 +116,32 @@
     "tokens_out": {
       "type": ["integer", "null"],
       "minimum": 0
+    },
+    "git_stats": {
+      "type": ["object", "null"],
+      "required": ["files_changed", "lines_added", "lines_removed"],
+      "additionalProperties": false,
+      "description": "v1.1. Working-tree change since the session started, measured with git by tools/forge_session.py.",
+      "properties": {
+        "files_changed": { "type": "integer", "minimum": 0 },
+        "lines_added": { "type": "integer", "minimum": 0 },
+        "lines_removed": { "type": "integer", "minimum": 0 },
+        "new_untracked_files": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Untracked files that appeared during the session; their lines count toward lines_added."
+        },
+        "baseline_dirty": {
+          "type": "boolean",
+          "description": "True if the working tree already had uncommitted changes at start; those are included in the counts."
+        },
+        "start_commit": { "type": ["string", "null"], "pattern": "^[a-f0-9]{7,64}$" }
+      }
+    },
+    "measured": {
+      "type": "array",
+      "items": { "type": "string", "enum": ["started_at", "timestamp", "wall_time_sec", "git_stats"] },
+      "description": "v1.1. Fields filled mechanically by tools/forge_session.py rather than self-reported."
     },
     "outcome": {
       "type": "string",
@@ -126,7 +159,7 @@
     },
     "notes": {
       "type": "string",
-      "description": "Free-form AI commentary on what worked, what failed, what to improve. Mined by Plan 1 (learnings store)."
+      "description": "Free-form AI commentary on what worked, what failed, what to improve. Mined by tools/forge_learn.py promote."
     }
   }
 }

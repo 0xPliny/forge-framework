@@ -75,7 +75,22 @@ Discipline matters. A store full of obvious entries is worse than a sparse store
 
 ## Wiring with telemetry
 
-`telemetry/sessions.jsonl` is the substrate. `tools/forge_report.py` already surfaces high-iteration and non-success sessions as "learnings-store candidates" — those are where insight tends to live. A future `tools/forge_promote.py` could convert a flagged session into a learning entry interactively.
+`telemetry/sessions.jsonl` is the substrate. `tools/forge_report.py` already surfaces high-iteration and non-success sessions as "learnings-store candidates" — those are where insight tends to live. `python tools/forge_learn.py promote --task-id <id>` converts a flagged session into a draft entry; fill in the `FILL IN` fields, then append it with `forge_learn.py add --file draft.json`.
+
+## Tooling
+
+[`tools/forge_learn.py`](../tools/forge_learn.py) implements this contract (stdlib only):
+
+```bash
+python tools/forge_learn.py search --category REPAIR --domain web_development --keywords race-condition,event-ordering
+python tools/forge_learn.py add --file entry.json        # fills id, date, normalized signature; validates
+python tools/forge_learn.py promote --task-id last       # draft from the last telemetry session
+python tools/forge_learn.py correct --from CREATION --to TRANSFORMATION --keywords refactor,existing
+python tools/forge_learn.py hints --keywords refactor,legacy
+python tools/forge_learn.py validate
+```
+
+`add` refuses entries that fail the schema, still contain `FILL IN` placeholders, or reuse an existing `learning_id` (append, don't mutate). `correct` and `hints` implement [classification learning](../workflows/classification_learning.md).
 
 ## Privacy
 

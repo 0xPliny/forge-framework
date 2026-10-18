@@ -186,8 +186,8 @@ Use C-A-R-E framework to:
 ## Related Documentation
 
 - [Security Testing Module](../modules/security_testing.yaml) - Domain standards and patterns
-- [R-I-S-E Framework](../frameworks/universal_rise.md) - Research → Identify → Synthesize → Execute
-- [C-A-R-E Framework](../frameworks/universal_care.md) - Context → Analyze → Respond → Evaluate
+- [R-I-S-E Framework](../workflows/rise.md) - Research → Identify → Synthesize → Execute
+- [C-A-R-E Framework](../workflows/care.md) - Context → Analyze → Respond → Evaluate
 - [Confidence Protocol](../core/confidence_protocol.md) - Confidence scoring methodology
 - [MCP Integration](../integrations/mcp_integration.md) - Browser automation for testing
 - [Browser Automation](../integrations/browser_automation.md) - Web application interaction
