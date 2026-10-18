@@ -120,7 +120,7 @@ $ /rise Build a notification filtering system for industrial equipment alerts
 
 ## 🚀 Features
 
-- 🔁 **Three Workflows** — `R-I-S-E` (Research → Identify → Synthesize → Execute) for creation and transformation. `C-A-R-E` (Context → Analyze → Respond → Evaluate) for repair and optimization. `HARVEST` for documentation and knowledge extraction.
+- 🔁 **Three Workflows** — `R-I-S-E` (Research → Identify → Synthesize → Execute) for creation and transformation. `C-A-R-E` (Context → Analyze → Respond → Evaluate) for repair and optimization. `HARVEST` for documentation and knowledge extraction, with an optional [executable engine](https://github.com/0xPliny/harvest) that extracts static evidence and uses REA for compiled apps.
 - 🎭 **Four Specialist Personas** — `Atlas` for deep research, `Sage` for architecture, `Scribe` for technical writing, `Sentinel` for security testing. Each is a self-contained role you load with a single command.
 - ⚡ **Native Claude Code** — Slash commands `/rise`, `/care`, `/harvest`, plus `/atlas`, `/sage`, `/scribe`, `/sentinel`. A `forge-classifier` skill auto-suggests routing for unrouted tasks.
 - 🧠 **OMEGA Loop** — `telemetry/sessions.jsonl` records every workflow invocation. `learnings/_index.jsonl` stores curated insights. Workflows retrieve prior learnings at Phase 0; new insights are appended at close. Grep-searchable from day one.

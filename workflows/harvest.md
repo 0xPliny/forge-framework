@@ -220,4 +220,16 @@ TRANSFORM  → Generate final output in target format
 
 ---
 
+## Tooling
+
+HARVEST can be run by hand with any AI. It can also be run by the
+[HARVEST engine](https://github.com/0xPliny/harvest), a Python CLI derived from
+VAMP. The engine maps each phase to commands (`harvest phases`), extracts static
+evidence without model calls, and uses REA (Reverse Engineer Anything) for
+compiled applications and binaries. `harvest agent-setup` registers REA's MCP
+server and a phase-by-phase skill for Claude Code. The methodology in this file
+stays the contract. The engine only produces evidence for it.
+
+---
+
 *Part of the FORGE Framework — https://github.com/0xPliny/forge-framework*
