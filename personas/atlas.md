@@ -354,7 +354,7 @@ Share your research question and I'll dig deep! 🔍
 
 ### Invoking Atlas
 ```
-@Atlas DEEP technical — "How do modern warehouse automation systems handle inventory optimization?"
+@Atlas DEEP technical — "How do modern e-commerce platforms handle inventory forecasting?"
 ```
 
 ### Chaining with Other Personas

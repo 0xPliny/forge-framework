@@ -56,17 +56,17 @@ Built on three pillars:
 A real workflow run, condensed. The same pattern works for `/care` (repair) and `/harvest` (understanding).
 
 ```text
-$ /rise Build a notification filtering system for industrial equipment alerts
+$ /rise Build a notification filtering system for infrastructure monitoring alerts
 
 ╭──────────────────────────────────────────────────────────────────────────╮
 │  FORGE  /  R-I-S-E Workflow                              confidence 8/10 │
 ╰──────────────────────────────────────────────────────────────────────────╯
 
 ▸ Phase 0  ·  Prior Learnings  ·  3 matches in learnings/
-   • 2026-04-22  "Equipment alert systems benefit from priority queues over
+   • 2026-04-22  "Alerting pipelines benefit from priority queues over
                   flat queues — confirmed in 3 prior implementations"  9/10
-   • 2026-03-11  "Industrial timeouts default ≥30s, not 5s like web norms —
-                  radio relays + PLCs need wider windows"              8/10
+   • 2026-03-11  "Batch-worker timeouts default ≥30s, not 5s like web norms —
+                  cold starts + retries need wider windows"            8/10
    • 2026-02-04  "Isolate alert ingest from notification dispatch —
                   coupling caused cascade failures last project"       9/10
 
@@ -101,7 +101,7 @@ $ /rise Build a notification filtering system for industrial equipment alerts
 ▸ Closing emissions
    → telemetry/sessions.jsonl    +1 entry   gates_passed: 8/8 · success
    → learnings/_index.jsonl      +1 entry   "WAL streaming for sub-2s
-                                              industrial alerts: confirmed"
+                                              alert dispatch: confirmed"
 ```
 
 ### Without FORGE vs With FORGE
@@ -226,7 +226,7 @@ Each is a self-contained prompt — paste the file or invoke the slash command. 
 
 ## 🎯 Where FORGE shines
 
-- 🏭 **Industrial automation** — Equipment alerting, dispatcher systems, PLC-adjacent integrations where wide timeouts and explicit assumptions matter
+- 📡 **Operations & monitoring** — Alerting pipelines, job dispatchers, integrations with slow or unreliable upstream systems where wide timeouts and explicit assumptions matter
 - 🔧 **Legacy modernization** — HARVEST extracts knowledge from old codebases; R-I-S-E + Sage designs the replacement; Sentinel audits the result
 - 🛡️ **Security assessments** — Sentinel + R-I-S-E walks OWASP Top 10 with CVSS scoring and reproducible PoCs
 - 📚 **Documentation generation** — HARVEST + Scribe produces layered docs from any codebase at 95%+ accuracy with confidence scores per claim
@@ -251,7 +251,7 @@ The retrieval and write contract lives in [`core/omega_retrieval.md`](core/omega
 
 ## 📊 Reported results
 
-> ⚠️ These figures are from the framework author's deployments across industrial automation, legacy modernization, and enterprise software — directional, not independently benchmarked.
+> ⚠️ These figures are from the framework author's own deployments across legacy modernization and enterprise software — directional, not independently benchmarked.
 
 - 🚀 **21x** developer efficiency improvement
 - 💰 **$0.002 / line** for trained AI workflows vs **$0.014 / line** untrained
@@ -316,7 +316,7 @@ PRs welcome. Open an issue first for substantial changes.
 
 ## 👤 About
 
-FORGE was developed by **[0xPliny](https://github.com/0xPliny)** through hands-on experience deploying AI-driven engineering workflows across industrial automation and enterprise software. It distills domain-agnostic patterns for making AI a reliable engineering partner — not just a code generator.
+FORGE was developed by **[0xPliny](https://github.com/0xPliny)** through hands-on experience deploying AI-driven engineering workflows across legacy modernization and enterprise software. It distills domain-agnostic patterns for making AI a reliable engineering partner — not just a code generator.
 
 🌐 [GitHub →](https://github.com/0xPliny) &nbsp;·&nbsp; 🏷️ Framework v1.2
 

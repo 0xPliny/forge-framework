@@ -7,7 +7,7 @@ The main `README.md` reports four quantitative claims:
 - **56x documentation speed improvement**
 - **240x standards-checking acceleration**
 
-These are figures from one operator's deployments (Chase Logan's, across industrial automation, legacy modernization, and enterprise software). They are not independent benchmarks. This document defines the methodology to reproduce them in your own environment using the telemetry stack.
+These are figures from one operator's deployments (Chase Logan's, across legacy modernization and enterprise software). They are not independent benchmarks. This document defines the methodology to reproduce them in your own environment using the telemetry stack.
 
 ## Why this exists
 
