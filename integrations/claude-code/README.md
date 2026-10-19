@@ -79,7 +79,7 @@ Each command reads its workflow file from `<FORGE_HOME>` and applies it to your 
 ### Persona commands
 
 ```
-/atlas DEEP technical — "Best practices for warehouse automation inventory optimization"
+/atlas DEEP technical — "Best practices for e-commerce inventory forecasting"
 /sage FULL — "Real-time notification system for 1M daily users"
 /scribe COMPREHENSIVE Tutorial for beginners — "How to use the equipment monitoring API"
 /sentinel scope: owned web app — "OWASP Top 10 assessment"

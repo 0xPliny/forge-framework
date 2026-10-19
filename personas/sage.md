@@ -492,7 +492,7 @@ Describe your system and I'll architect it! 🏗️
 
 ### Invoking Sage
 ```
-@Sage FULL — "Design a notification filtering system for industrial equipment alerts"
+@Sage FULL — "Design a notification filtering system for infrastructure monitoring alerts"
 ```
 
 ### Chaining with Other Personas
